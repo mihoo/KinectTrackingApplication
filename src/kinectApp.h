@@ -86,7 +86,8 @@ public:
 	ofxOpenNI openNIDevices[MAX_DEVICES];
     
     void userEvent(ofxOpenNIUserEvent & event);
-	void gestureEvent(ofxOpenNIGestureEvent & event);
+	//void gestureEvent(ofxOpenNIGestureEvent & event);
+	void handEvent(ofxOpenNIHandEvent & event);
 
 	ofxOpenNIUser sceneUser;
 	ofxOpenNIHand sceneHandTracker;
