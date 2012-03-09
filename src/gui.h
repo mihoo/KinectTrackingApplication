@@ -53,7 +53,7 @@ void kinectApp::setupGui(){
 
 	depth = true;
 	skel = false;
-	hands = false;
+	hands = true;
 	objects = false; 
 	oscHands01 = false;
 	oscSkeletons01 = false;

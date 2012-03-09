@@ -328,7 +328,21 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\addons\ofxOpenNI\win\copy_to_data_openni_path\lib\openNI.lib" />
+    <None Include="bin\data\openni\lib\nimCodecs.dll" />
+    <None Include="bin\data\openni\lib\nimMockNodes.dll" />
+    <None Include="bin\data\openni\lib\nimRecorder.dll" />
+    <None Include="bin\data\openni\lib\OpenNI.dll" />
+    <None Include="bin\data\openni\lib\XnVCNITE_1_5_2.dll" />
+    <None Include="bin\data\openni\lib\XnVFeatures_1_5_2.dll" />
+    <None Include="bin\data\openni\lib\XnVHandGenerator_1_5_2.dll" />
+    <None Include="bin\data\openni\lib\XnVNITE_1_5_2.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="bin\data\openni\lib\openNI.lib" />
+    <Library Include="bin\data\openni\lib\XnVCNITE_1_5_2.lib" />
+    <Library Include="bin\data\openni\lib\XnVFeatures_1_5_2.lib" />
+    <Library Include="bin\data\openni\lib\XnVHandGenerator_1_5_2.lib" />
+    <Library Include="bin\data\openni\lib\XnVNITE_1_5_2.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

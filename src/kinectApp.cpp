@@ -129,10 +129,17 @@ void kinectApp::setupScene() {
                                              // allows you to set all tracked user properties to the same type easily
                                              // and allows you to create your own user class that inherits from ofxOpenNIUser
 	
-	openNIDevices[0].setMaxNumHands(nrHand);
+	openNIDevices[0].addAllHandFocusGestures();
 	ofAddListener(openNIDevices[0].gestureEvent, this, &kinectApp::gestureEvent);
 
-	openNIDevices[0].addAllHandFocusGestures();
+	/*openNIDevices[0].setMaxNumHands(nrHand);
+
+	int num;
+	num = openNIDevices[0].getMaxNumHands();
+	cout << "maxNumHands: " << ofToString(num) << endl;*/
+
+
+	//sceneHandTracker.isTracking();
 	//openNIDevices[0].setBaseHandClass(sceneHandTracker);
 	
 	width = 640; //openNIDevices[0].getWidth();
@@ -224,7 +231,7 @@ void kinectApp::draw(){
 		
 		drawCamView();
 
-		if (hands) { drawAllHands(); }
+		//if (hands) { drawAllHands(); }
 
 		if (skel) { drawSkeletons(); }
 
@@ -269,8 +276,8 @@ void kinectApp::draw(){
 	for (int deviceID = 0; deviceID < numDevices; deviceID++){
 		if (isLive && skel) { statusSkeletons = ofToString(openNIDevices[0].getNumTrackedUsers()); }
 		else { statusSkeletons = "0"; }
-		if (isLive && hands) { statusHands = ofToString(openNIDevices[0].getNumTrackedHands()); }
-		else { statusHands = "0"; }
+		//if (isLive && hands) { statusHands = ofToString(openNIDevices[0].getNumTrackedHands()); }
+		//else { statusHands = "0"; }
 	}
 	/*if (isLive && objects) { statusObjects = ofToString(contourFinder.blobs.size()); }
 	else { statusObjects = "0"; }
@@ -355,12 +362,12 @@ void kinectApp::drawAllHands(){
 	ofSetColor(255, 255, 255);
 	stringstream msgHand[8];
 	int msgHY[8];
-	for (int i = 0; i < nrHand; i++){
+	/*for (int i = 0; i < nrHand; i++){
 		msgHY[i] = 50+(i*20);
 		msgHand[i]
 			<< "HandNr " << ofToString(idHand[i]) << " : ( " << ofToString(aHand[i], 3) << " | " << ofToString(bHand[i], 3) << " | " << ofToString(cHand[i], 3) << " )" << endl;
 		usedFont.drawString(msgHand[i].str(), 1000, msgHY[i]);
-	}
+	}*/
 }
 
 //--------------------------------------------------------------
@@ -449,7 +456,7 @@ void kinectApp::drawDetails() {
 	ofPushMatrix();
 	ofTranslate (15, 35);
 	
-	if (!hands) { for (int i = 0; i < nrHand; i++){
+	/*if (!hands) { for (int i = 0; i < nrHand; i++){
 		idHand[i] = 0; aHand[i] = 0; bHand[i] = 0; cHand[i] = 0; } 
 	}
 	else if(hands){
@@ -474,7 +481,7 @@ void kinectApp::drawDetails() {
 			usedFont.drawString(hID[i].str(), (openNIDevices[0].getTrackedHand(i).getPosition().x)*0.5-4, (openNIDevices[0].getTrackedHand(i).getPosition().y)*0.5+5);
 			ofSetColor(255, 255, 255);		
 		}
-	}
+	}*/
 	
 	if (!skel) { for (int i = 0; i < nrBody; i++){ 
 		idBody[i] = 0; aBody[i] = 0; bBody[i] = 0; cBody[i] = 0; } 

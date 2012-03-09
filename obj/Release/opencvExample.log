@@ -1,9 +1,9 @@
-﻿Der Buildvorgang wurde am 08.03.2012 12:56:17 gestartet.
+﻿Der Buildvorgang wurde am 08.03.2012 17:17:47 gestartet.
      1>Projekt "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\opencvExample.vcxproj" auf Knoten "2", rebuild Ziel(e).
      1>_PrepareForClean:
          Die Datei "obj\Release\Kinect.lastbuildstate" wird gelöscht.
        InitializeBuildStatus:
-         "obj\Release\Kinect.unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+         Aktualisieren des Timestamps von "obj\Release\Kinect.unsuccessfulbuild".
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\..\libs\openFrameworks /I..\..\..\libs\openFrameworks\graphics /I..\..\..\libs\openFrameworks\app /I..\..\..\libs\openFrameworks\sound /I..\..\..\libs\openFrameworks\utils /I..\..\..\libs\openFrameworks\communication /I..\..\..\libs\openFrameworks\video /I..\..\..\libs\openFrameworks\math /I..\..\..\libs\openFrameworks\types /I..\..\..\libs\openFrameworks\events /I..\..\..\libs\glut\include /I..\..\..\libs\rtAudio\include /I..\..\..\libs\quicktime\include /I..\..\..\libs\freetype\include /I..\..\..\libs\freetype\include\freetype2 /I..\..\..\libs\freeImage\include /I..\..\..\libs\fmodex\include /I..\..\..\libs\videoInput\include /I..\..\..\libs\glew\include\ /I..\..\..\libs\glu\include /I..\..\..\libs\poco\include /I..\..\..\addons /I..\..\..\libs\openFrameworks\gl /I..\..\..\libs\openFrameworks\3d /I..\..\..\libs\tess2\include /I..\..\..\libs\cairo\include\cairo /I..\..\..\addons\ofxNetwork\src /I..\..\..\addons\ofxDirList\src /I..\..\..\addons\ofxObjLoader\src /I..\..\..\addons\ofxOpenCv\libs\opencv\include /I..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv /I..\..\..\addons\ofxOpenCv\src /I..\..\..\addons\ofxOsc\src /I..\..\..\addons\ofxOsc\libs\oscpack\include\ip /I..\..\..\addons\ofxOsc\libs\oscpack\include\osc /I..\..\..\addons\ofxThread\src /I..\..\..\addons\ofxVectorGraphics\src /I..\..\..\addons\ofxVectorGraphics\libs /I..\..\..\addons\ofxVectorMath\src /I..\..\..\addons\ofxGui\src /I..\..\..\addons\ofxXMLSettings\libs /I..\..\..\addons\ofxXMLSettings\src /I..\..\..\addons\ofx3DModelLoader\src /I..\..\..\addons\ofx3DModelLoader\src\3DS /I..\..\..\addons\ofxAssimpModelLoader\src /I..\..\..\addons\ofxAssimpModelLoader\libs\assimp\include /I..\..\..\addons\ofxThreadedImageLoader\src /I"..\..\..\addons\ofxOpenNI-experimental\include\openni" /I"..\..\..\addons\ofxOpenNI-experimental\include\nite" /I"..\..\..\addons\ofxOpenNI-experimental\src" /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _CONSOLE /D POCO_STATIC /D CAIRO_WIN32_STATIC_BUILD /D DISABLE_SOME_FLOATING_POINT /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj\Release\\" /Fd"obj\Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\addons\ofxGui\src\ofxGui.cpp ..\..\..\addons\ofxGui\src\ofxGuiButton.cpp ..\..\..\addons\ofxGui\src\ofxGuiColor.cpp ..\..\..\addons\ofxGui\src\ofxGuiFiles.cpp ..\..\..\addons\ofxGui\src\ofxGuiGlobals.cpp ..\..\..\addons\ofxGui\src\ofxGuiKnob.cpp ..\..\..\addons\ofxGui\src\ofxGuiMatrix.cpp ..\..\..\addons\ofxGui\src\ofxGuiMovable.cpp ..\..\..\addons\ofxGui\src\ofxGuiObject.cpp ..\..\..\addons\ofxGui\src\ofxGuiPanel.cpp ..\..\..\addons\ofxGui\src\ofxGuiPoints.cpp ..\..\..\addons\ofxGui\src\ofxGuiRadar.cpp ..\..\..\addons\ofxGui\src\ofxGuiScope.cpp ..\..\..\addons\ofxGui\src\ofxGuiSlider.cpp ..\..\..\addons\ofxGui\src\ofxGuiSwitch.cpp ..\..\..\addons\ofxGui\src\ofxGuiXYPad.cpp ..\..\..\addons\ofxOpenCv\src\ofxCvHaarFinder.cpp "..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp" "..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNITypes.cpp" ..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp ..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp ..\..\..\addons\ofxOsc\src\ofxOscReceiver.cpp ..\..\..\addons\ofxOsc\src\ofxOscSender.cpp ..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp ..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp ..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp ..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp ..\..\..\addons\ofxOpenCv\src\ofxCvColorImage.cpp ..\..\..\addons\ofxOpenCv\src\ofxCvContourFinder.cpp ..\..\..\addons\ofxOpenCv\src\ofxCvFloatImage.cpp ..\..\..\addons\ofxOpenCv\src\ofxCvGrayscaleImage.cpp ..\..\..\addons\ofxOpenCv\src\ofxCvImage.cpp ..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.cpp src\filter.cpp src\main.cpp src\kinectApp.cpp
          ofxGui.cpp
@@ -26,295 +26,300 @@
          ofxOpenNI.cpp
      1>..\..\..\libs\openFrameworks\graphics\ofPixels.h(150): warning C4003: Nicht genügend übergebene Parameter für das Makro 'max'
      1>..\..\..\libs\openFrameworks\graphics\ofPixels.h(151): warning C4003: Nicht genügend übergebene Parameter für das Makro 'max'
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(480): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(483): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(713): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(716): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(722): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(725): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(731): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(734): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(740): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(743): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(754): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(757): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(762): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(765): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(770): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(773): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(776): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(779): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(864): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(867): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(871): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(874): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(878): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(881): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(885): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(888): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(892): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(895): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(899): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(902): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(906): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(909): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(913): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(916): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(980): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(983): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(995): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(998): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1008): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1011): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1021): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1024): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1034): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1037): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1088): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1091): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1099): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1102): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1285): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1327): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1339): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1393): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1346): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1400): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1364): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1418): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1386): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1440): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1468): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1522): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1501): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1555): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1528): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1582): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1601): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1655): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1705): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1760): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1718): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1773): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1724): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1779): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1744): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(1799): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2095): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2150): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2101): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2156): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2162): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2217): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2179): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2234): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2322): warning C4805: '!=': unsichere Kombination von Typ 'XnBool' mit Typ 'bool' in einer Operation
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2330): warning C4805: '!=': unsichere Kombination von Typ 'XnBool' mit Typ 'bool' in einer Operation
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2338): warning C4805: '!=': unsichere Kombination von Typ 'XnBool' mit Typ 'bool' in einer Operation
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2377): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2377): warning C4805: '!=': unsichere Kombination von Typ 'XnBool' mit Typ 'bool' in einer Operation
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2385): warning C4805: '!=': unsichere Kombination von Typ 'XnBool' mit Typ 'bool' in einer Operation
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2393): warning C4805: '!=': unsichere Kombination von Typ 'XnBool' mit Typ 'bool' in einer Operation
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2432): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2405): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2460): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2416): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2471): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2424): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2483): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2544): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2603): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2727): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2645): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2743): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2792): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2768): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2808): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2794): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2833): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2821): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2859): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3044): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(2886): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3100): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3109): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3122): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3165): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3144): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3187): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3163): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3209): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3192): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3228): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
                  ]
-     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3210): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3257): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
+                 with
+                 [
+                     M=Poco::FastMutex
+                 ]
+     1>..\..\..\addons\ofxOpenNI-experimental\src\ofxOpenNI.cpp(3275): warning C4930: 'Poco::ScopedLock<M> lock(void)': Funktion mit Prototyp wurde nicht aufgerufen (war eine Variablendefinition gemeint?)
                  with
                  [
                      M=Poco::FastMutex
@@ -347,7 +352,7 @@
          kinectApp.cpp
      1>..\..\..\libs\openFrameworks\graphics\ofPixels.h(150): warning C4003: Nicht genügend übergebene Parameter für das Makro 'max'
      1>..\..\..\libs\openFrameworks\graphics\ofPixels.h(151): warning C4003: Nicht genügend übergebene Parameter für das Makro 'max'
-     1>src\kinectApp.cpp(858): warning C4060: switch-Anweisung enthält weder 'case'- noch 'default'-Marken
+     1>src\kinectApp.cpp(865): warning C4060: switch-Anweisung enthält weder 'case'- noch 'default'-Marken
          Code wird generiert...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"bin\Kinect.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\..\..\libs\glut\lib\vs2010 /LIBPATH:..\..\..\libs\rtAudio\lib\vs2010 /LIBPATH:..\..\..\libs\FreeImage\lib\vs2010 /LIBPATH:..\..\..\libs\freetype\lib\vs2010 /LIBPATH:..\..\..\libs\quicktime\lib\vs2010 /LIBPATH:..\..\..\libs\fmodex\lib\vs2010 /LIBPATH:..\..\..\libs\videoInput\lib\vs2010 /LIBPATH:..\..\..\libs\cairo\lib\vs2010 /LIBPATH:..\..\..\libs\glew\lib\vs2010 /LIBPATH:..\..\..\libs\glu\lib\vs2010 /LIBPATH:..\..\..\libs\Poco\lib\vs2010 /LIBPATH:..\..\..\libs\tess2\lib\vs2010 /LIBPATH:..\..\..\libs\openFrameworksCompiled\lib\vs2010 /LIBPATH:bin\data\openni\lib openframeworksLib.lib "cairo-static.lib" "pixman-1.lib" msimg32.lib OpenGL32.lib GLu32.lib kernel32.lib setupapi.lib glut32.lib rtAudio.lib videoInput.lib libfreetype.lib FreeImage.lib qtmlClient.lib dsound.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib glew32s.lib fmodex_vc.lib glu32.lib Vfw32.lib comctl32.lib PocoFoundationmd.lib PocoNetmd.lib PocoUtilmd.lib PocoXMLmd.lib Ws2_32.lib tess2.lib ..\..\..\addons\ofxOsc\libs\oscpack\lib\vs2010\oscpack.lib ..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs2010\assimp.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_calib3d220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_contrib220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_core220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_features2d220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_flann220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_gpu220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_highgui220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_imgproc220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_legacy220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_ml220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_objdetect220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_ts220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_video220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_lapack.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\zlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:atlthunk.lib /NODEFAULTLIB:LIBC.lib /NODEFAULTLIB:LIBCMT /MANIFEST /ManifestFile:"obj\Release\Kinect.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\bin\Kinect.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"bin\Kinect.lib" /MACHINE:X86 obj\Release\ofxGui.obj
@@ -386,7 +391,11 @@
          obj\Release\filter.obj
          obj\Release\main.obj
          obj\Release\kinectApp.obj
-         ..\..\..\addons\ofxOpenNI\win\copy_to_data_openni_path\lib\openNI.lib
+         bin\data\openni\lib\openNI.lib
+         bin\data\openni\lib\XnVCNITE_1_5_2.lib
+         bin\data\openni\lib\XnVFeatures_1_5_2.lib
+         bin\data\openni\lib\XnVHandGenerator_1_5_2.lib
+         bin\data\openni\lib\XnVNITE_1_5_2.lib
          "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\libs\openFrameworksCompiled\project\vs2010\obj\Release\of3dUtils.obj"
          "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\libs\openFrameworksCompiled\project\vs2010\obj\Release\ofCamera.obj"
          "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\libs\openFrameworksCompiled\project\vs2010\obj\Release\ofEasyCam.obj"
@@ -446,25 +455,11 @@
          opencvExample.vcxproj -> C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\bin\Kinect.exe
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"bin\Kinect.exe;#1" /manifest obj\Release\Kinect.exe.intermediate.manifest
-       PostBuildEvent:
-         Description: adding DLLs and creating data folder
-         xcopy /e /i /y "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\*.dll" "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\bin"
-         if not exist "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\bin\data" mkdir  "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\bin\data"
          
-         :VCEnd
-         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\Assimp32.dll
-         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\fmodex.dll
-         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\fmodexL.dll
-         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\FreeImage.dll
-         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\FreeType-6.dll
-         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\glut32.dll
-         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\Zlib.dll
-         7 Datei(en) kopiert
-       FinalizeBuildStatus:
-         Die Datei "obj\Release\Kinect.unsuccessfulbuild" wird gelöscht.
-         Aktualisieren des Timestamps von "obj\Release\Kinect.lastbuildstate".
-     1>Die Erstellung des Projekts "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\opencvExample.vcxproj" ist abgeschlossen, rebuild Ziel(e).
+     1>mt.exe : general error c101008d: Failed to write the updated manifest to the resource of file "bin\Kinect.exe". Der Prozess kann nicht auf die Datei zugreifen, da sie von einem anderen Prozess verwendet wird.
+         
+     1>Die Erstellung des Projekts "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\opencvExample.vcxproj" ist abgeschlossen, rebuild Ziel(e) -- FEHLER.
 
-Das Erstellen war erfolgreich.
+Fehler beim Erstellen
 
-Verstrichene Zeit 00:01:55.27
+Verstrichene Zeit 00:01:58.25
