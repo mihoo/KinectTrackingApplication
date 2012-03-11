@@ -53,7 +53,7 @@ void kinectApp::setupGui(){
 
 	depth = true;
 	skel = false;
-	hands = true;
+	hands = false;
 	objects = false; 
 	oscHands01 = false;
 	oscSkeletons01 = false;
@@ -129,41 +129,16 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 
 		case switchButton02:
 			hands = !hands;
-			/*for (int deviceID = 0; deviceID < numDevices; deviceID++){
-				for (int i = 0; i < 100; i++){
-					if (hands && i == 0){ 
-						openNIDevices[deviceID].addGestureGenerator();
-						openNIDevices[deviceID].addHandsGenerator(); 
-						openNIDevices[0].setMaxNumHands(nrHand);
-						ofAddListener(openNIDevices[0].handEvent, this, &kinectApp::handEvent);
-						openNIDevices[0].addAllHandFocusGestures();
-						openNIDevices[0].setBaseHandClass(sceneHandTracker);
-						if (i >= 100) { i = 1; }
-					}
-					if (!hands){ 
-						openNIDevices[deviceID].removeGestureGenerator(); 
-						openNIDevices[deviceID].removeHandsGenerator(); 
-						i = 0;
-					}
-				}
-			}
-			if (hands){ sceneHandTracker.isTracking() == true; }
-			if (!hands){ sceneHandTracker.isTracking() == false; }*/
 			break;
 		case switchButton03:
 			skel = !skel;
-			/*bUsers01 = openNIDevices[0].getNumTrackedUsers();
-			for (int nID = 0; nID < bUsers01; nID++){
-				//if (skel){ openNIDevices[0].resetUserTracking(nID, skel); }
-				//if (!skel){ openNIDevices[0].resetUserTracking(nID, skel); }
-				openNIDevices[0].resetUserTracking(nID, skel);
-			}*/
 			break;
 		case switchButton04:
 			objects = !objects;	
 			if(objects == true){
 			objectTrackingOptions = gui->addPanel(3, "Object Dimensions", 690, 295, 12, OFXGUI_PANEL_SPACING);
-			//objectTrackingOptions->addSlider(slider01, "Nearest Distance", 250, 15, 1, sceneDepth.getMaxDepth(), nearThreshold, kofxGui_Display_Int, 1);
+			objectTrackingOptions->addSlider(slider01, "Nearest Distance", 250, 15, 1, 10000, nearThreshold, kofxGui_Display_Int, 1);
+			objectTrackingOptions->addSlider(slider02, "Furthest Distance", 250, 15, 1, 10000, farThreshold, kofxGui_Display_Int, 1);
 			//objectTrackingOptions->addSlider(slider02, "Furthest Distance", 250, 15, 1, sceneDepth.getMaxDepth(), farThreshold, kofxGui_Display_Int, 1);
 			objectTrackingOptions->addSlider(slider03, "Min-Size of Object", 250, 15, 0, 200000, minBlobSize, kofxGui_Display_Int, 1);
 			objectTrackingOptions->addSlider(slider04, "Max-Size of Object", 250, 15, 0, 200000, maxBlobSize, kofxGui_Display_Int, 1);
@@ -358,7 +333,7 @@ void kinectApp::loadPersonalConfiguration(){
 	a = hands;
 	b =	XML.getValue("PERSONALCONFIGURATION:TRACKOPTIONS:HANDS", 0);
 	if (a == b){ hands = b; }
-	//else if (a != b) { hands = b; sceneHandTracker.toggleTrackHands(); }
+	else if (a != b) { hands = b; }
 	hands	=	XML.getValue("PERSONALCONFIGURATION:TRACKOPTIONS:HANDS", 0);
 	skel	=	XML.getValue("PERSONALCONFIGURATION:TRACKOPTIONS:SKELETONS", 0);
 	objects	=	XML.getValue("PERSONALCONFIGURATION:TRACKOPTIONS:OBJECTS", 0);
@@ -423,16 +398,16 @@ void kinectApp::loadPersonalConfiguration(){
 	camRotation->addSlider(slider10, "", 250, 15, -33, 33, rotation, kofxGui_Display_Int, 1);
 	camRotation->mObjWidth = 275;
 	camRotation->mObjHeight = 60;
-
+	
 	if(objects){
 		objectTrackingOptions = gui->addPanel(3, "Object Dimensions", 690, 295, 12, OFXGUI_PANEL_SPACING);
-		//objectTrackingOptions->addSlider(slider01, "Nearest Distance", 250, 15, 1, sceneDepth.getMaxDepth(), nearThreshold, kofxGui_Display_Int, 1);
-		//objectTrackingOptions->addSlider(slider02, "Furthest Distance", 250, 15, 1, sceneDepth.getMaxDepth(), farThreshold, kofxGui_Display_Int, 1);
+		objectTrackingOptions->addSlider(slider01, "Nearest Distance", 250, 15, 1, 10000, nearThreshold, kofxGui_Display_Int, 1);
+		objectTrackingOptions->addSlider(slider02, "Furthest Distance", 250, 15, 1, 10000, farThreshold, kofxGui_Display_Int, 1);
 		objectTrackingOptions->addSlider(slider03, "Min-Size of Object", 250, 15, 0, 200000, minBlobSize, kofxGui_Display_Int, 1);
 		objectTrackingOptions->addSlider(slider04, "Max-Size of Object", 250, 15, 0, 200000, maxBlobSize, kofxGui_Display_Int, 1);
 		objectTrackingOptions->mObjWidth = 275;
 		objectTrackingOptions->mObjHeight = 205;
-			
+		
 		imageProcessingOptions = gui->addPanel(4, "Image Processing", 690, 510, 12, OFXGUI_PANEL_SPACING);
 		imageProcessingOptions->addButton(triggerButton01, "Capture Background", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
 		imageProcessingOptions->addButton(switchButton05, "Add  Background", 10, 10, kofxGui_Button_Off, kofxGui_Button_Switch, "");

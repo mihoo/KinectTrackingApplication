@@ -110,6 +110,7 @@ void kinectApp::setupScene() {
         openNIDevices[deviceID].addUserGenerator();
 		openNIDevices[deviceID].addGestureGenerator();
 		openNIDevices[deviceID].addHandsGenerator();
+		openNIDevices[deviceID].addDepthThreshold(nearThreshold, farThreshold);
         openNIDevices[deviceID].setRegister(true);
         openNIDevices[deviceID].setMirror(true);
 		openNIDevices[deviceID].start();
@@ -135,6 +136,8 @@ void kinectApp::setupScene() {
 
 	openNIDevices[0].setMaxNumHands(nrHand);
 
+	//openNIDevices[0].setDepthColoring(COLORING_GREY);
+
 	/*int num;
 	num = openNIDevices[0].getMaxNumHands();
 	cout << "maxNumHands: " << ofToString(num) << endl;*/
@@ -142,6 +145,7 @@ void kinectApp::setupScene() {
 
 	//sceneHandTracker.isTracking();
 	//openNIDevices[0].setBaseHandClass(sceneHandTracker);
+	//openNIDevices[0].set objectsDepth;
 	
 	width = 640; //openNIDevices[0].getWidth();
 	height = 480; //openNIDevices[0].getHeight();
@@ -151,6 +155,11 @@ void kinectApp::setupScene() {
 	for (int i = 0; i < nrBody; i++){
 		userImg[i].allocate(width, height);
 	}
+	
+	for (int i = 0; i < MAX_NUMBER_DEPTHS; i++) {
+		maskPixels[i] = new unsigned char[width * height];
+	}
+
 }
 
 //--------------------------------------------------------------
@@ -162,15 +171,8 @@ void kinectApp::update(){
 
 	if (isLive) {
 		
-		/*
-		// update all nodes
-		sceneContext.update(); // end of this function call throws the ERROR "Could not open file mapping object" after running line 5934 in XnCppWrapper.h
-		sceneDepth.update();  
-		sceneImage.update();*/
-
 		for (int deviceID = 0; deviceID < numDevices; deviceID++){
 			openNIDevices[deviceID].update();
-			//cout << "x: " << ofToString(sceneUser.getCenter().x) << "  y: " << ofToString(sceneUser.getCenter().y) << "  z: " << ofToString(sceneUser.getCenter().z) <<endl;
 		}
 
 		// Calculate FPS of Camera
@@ -182,13 +184,37 @@ void kinectApp::update(){
 			lastFPSlog = time;
 		}//End calculation
 
-		/*
 		if (objects){	
-			sceneDepth2.update();
+			//sceneDepth2.update();
 			//pixels();
+			/*
+			int index = 0;
+			for (int deviceID = 0; deviceID < numDevices; index++){
+				//openNIDevices[deviceID].addDepthThreshold(nearThreshold, farThreshold);
+				//objectsDepth = openNIDevices[0].getDepthThreshold(index);
+			}*/
 
-			unsigned char * sourcePixels = sceneDepth.getDepthPixels(nearThreshold, farThreshold);	
+			
+			//openNIDevices[0].getDepthThreshold(0).setNearThreshold(nearThreshold);
+			//objectsDepth // = openNIDevices[0].getDepthPixels();
+			//openNIDevices[0].getDepthThreshold(0).setFarThreshold(farThreshold);
+
+
+			//int groesse = openNIDevices[0].getDepthPixels().getChannel(0).size();
+			//cout << "deptPixels.size " << ofToString(groesse) << endl;
+
+			/*ofPixels test2;
+			test2 = openNIDevices[0].getDepthPixels();
+			test2.resize(width, height, OF_INTERPOLATE_NEAREST_NEIGHBOR);
+			cout << "test2.size " << ofToString(test2.size()) << endl;*/
+
+			unsigned char * sourcePixels = getDepthPixels(nearThreshold, farThreshold);
+				//test2.getPixels(); //openNIDevices[0].getDepthPixels(nearThreshold, farThreshold).getPixels(); //sceneDepth.getDepthPixels(nearThreshold, farThreshold);	
 			kinectImage.setFromPixels(sourcePixels, width, height);
+			
+			//int groesse = kinectImage.getPixelsRef().size();
+			//cout << "kinectImage.size " << ofToString(groesse) << endl;
+
 			//kinectImage.flagImageChanged();
 			processedImg = kinectImage;
 
@@ -199,11 +225,8 @@ void kinectApp::update(){
 			contourFinder.findContours(processedImg, minBlobSize, maxBlobSize, nrObjects, false);
 
 			objectGenerator();		
-		}*/
-
-		// update tracking nodes
-		// demo getting pixels from user gen
-		
+		}
+	
 		if (skel){
 			if((bool)openNIDevices[0].getUserGenerator().IsGenerating() == false) { openNIDevices[0].getUserGenerator().StartGenerating(); }
 			int numUsers = openNIDevices[0].getNumTrackedUsers();
@@ -236,7 +259,7 @@ void kinectApp::draw(){
 
 		if (skel) { drawSkeletons(); }
 
-		//if (objects == true) { drawObjects(); }
+		if (objects) { drawObjects(); }
 
 		drawDetails();
 
@@ -265,39 +288,31 @@ void kinectApp::draw(){
 	msgA
 	//<< "FrameRate: " << ofToString(int(ofGetFrameRate())) << "  " << statusHardware << endl
 	<< "FrameRate: " << ofToString(fps) << "  " << statusHardware << endl
-	//<< endl
 	<< "Connection: " << statusConnection << endl
-	//<< endl
 	<< "Settings: " << statusNetwork << endl;
 	usedFont.drawString(msgA.str(), 850, 30);
-	
-	/*if (isLive && hands) { statusHands = ofToString(sceneHandTracker.getNumTrackedHands()); }
-	else { statusHands = "0"; }*/
 	
 	for (int deviceID = 0; deviceID < numDevices; deviceID++){
 		if (isLive && skel) { statusSkeletons = ofToString(openNIDevices[0].getNumTrackedUsers()); }
 		else { statusSkeletons = "0"; }
+		
 		if (isLive && hands) { statusHands = ofToString(openNIDevices[0].getNumTrackedHands()); }
 		else { statusHands = "0"; }
+		
+		if (isLive && objects) { statusObjects = ofToString(contourFinder.blobs.size()); }
+		else { statusObjects = "0"; }
 	}
-	/*if (isLive && objects) { statusObjects = ofToString(contourFinder.blobs.size()); }
-	else { statusObjects = "0"; }
-	stringstream msgB;
-	msgB
-	<< "( Hands: " << statusHands << " ) ( Skeletons: " << statusSkeletons << " ) ( Objects: " << statusObjects << " )" << endl;
-	usedFont.drawString(msgB.str(), 690, 820);*/
 
 	stringstream msgB;
 	msgB
-	<< "( Hands: " << statusHands << " ) ( Skeletons: " << statusSkeletons << " )" << endl;
+	<< "( Hands: " << statusHands << " ) ( Skeletons: " << statusSkeletons << " ) ( Objects: " << statusObjects << " )" << endl;
 	usedFont.drawString(msgB.str(), 690, 820);
 
 	stringstream msgC;
 	msgC
 	<< "Host: " << host << endl
 	<< "Port: " << ofToString(port) << endl;
-	usedFont.drawString(msgC.str(), 850, 85);
-	
+	usedFont.drawString(msgC.str(), 850, 85);	
 }
 
 //--------------------------------------------------------------
@@ -329,12 +344,10 @@ void kinectApp::drawCamView(){
 	glScalef(0.5, 0.5, 0.5);
 
 	if(ir == true){
-		//sceneImage.draw(0, 0, 640, 480);
 		openNIDevices[0].drawImage(0, 0, 640, 480);
 	}
 
 	if(depth == true){
-		//sceneDepth.draw(0, 0, 640, 480);
 		openNIDevices[0].drawDepth(0, 0, 640, 480);
 	}	
 		
@@ -354,7 +367,6 @@ void kinectApp::drawAllHands(){
 	glPushMatrix();
 	ofTranslate (15, 35);
 	glScalef(0.5, 0.5, 0.5);
-	//sceneHandTracker.drawHands();
 	for (int deviceID = 0; deviceID < numDevices; deviceID++){
 		openNIDevices[deviceID].drawHands(0, 0, 640, 480);
 	}
@@ -426,7 +438,6 @@ void kinectApp::drawSkeletons(){
 }
 
 //--------------------------------------------------------------
-/*
 void kinectApp::drawObjects(){
 	
 	glPushMatrix();
@@ -445,6 +456,9 @@ void kinectApp::drawObjects(){
 	stringstream msgObject[20];
 	int msgOY[20];
 	for (int i = 0; i < nrObjects; i++){
+		if ((int)aObject[i] > 1 || (int)aObject[i] < 0) { aObject[i] = 0; }
+		if ((int)bObject[i] > 1 || (int)bObject[i] < 0) { bObject[i] = 0; }
+		if ((int)cObject[i] > 1 || (int)cObject[i] < 0) { cObject[i] = 0; }
 		msgOY[i] = 350+(i*20);
 		msgObject[i]
 			//<< "ObjectNr " << ofToString(idObject[i]) << " : ( " << ofToString(aObject[i], 3) << " | " << ofToString(bObject[i], 3) << " | " << ofToString(cObject[i], 3) << " | " << ofToString(cObject2[i], 3) << " )" << endl;
@@ -452,7 +466,6 @@ void kinectApp::drawObjects(){
 		usedFont.drawString(msgObject[i].str(), 1000, msgOY[i]);
 	}
 }
-*/
 
 //--------------------------------------------------------------
 void kinectApp::drawDetails() {
@@ -464,21 +477,12 @@ void kinectApp::drawDetails() {
 		idHand[i] = 0; aHand[i] = 0; bHand[i] = 0; cHand[i] = 0; } 
 	}
 	else if(hands){
-		for (int i = 0; i < openNIDevices[0].getNumTrackedHands(); i++){ // i < sceneHandTracker.tracked_hands.size();
-			idHand[i] = openNIDevices[0].getTrackedHand(i).getID(); //sceneHandTracker.getID(); //(int)sceneHandTracker.tracked_hands[i]->nID; 
-			//aHand[i] = sceneHandTracker.tracked_hands[i]->progPos.x;
-			//bHand[i] = sceneHandTracker.tracked_hands[i]->progPos.y;
-			//cHand[i] = sceneHandTracker.tracked_hands[i]->progPos.z;
+		for (int i = 0; i < openNIDevices[0].getNumTrackedHands(); i++){ 
+			idHand[i] = openNIDevices[0].getTrackedHand(i).getID(); 
 			aHand[i] = openNIDevices[0].getTrackedHand(i).getPosition().x / width;
 			bHand[i] = openNIDevices[0].getTrackedHand(i).getPosition().y / height;
 			cHand[i] = openNIDevices[0].getTrackedHand(i).getPosition().z / 10000;
-	
-			//if ((int)sceneHandTracker.tracked_hands[i]->nID > 99 || (int)sceneHandTracker.tracked_hands[i]->nID < 0) { idHand[i] = 0; }
-			
-			//if ((int)sceneHandTracker.tracked_hands[i]->progPos.x > 1 || (int)sceneUser.tracked_users[i]->progPos.x < 0) { aHand[i] = 0; }
-			//if ((int)sceneHandTracker.tracked_hands[i]->progPos.y > 1 || (int)sceneUser.tracked_users[i]->progPos.y < 0) { bHand[i] = 0; }
-			//if ((int)sceneHandTracker.tracked_hands[i]->progPos.z > 1 || (int)sceneUser.tracked_users[i]->progPos.z < 0) { cHand[i] = 0; }
-									
+							
 			stringstream hID[8];
 			ofSetColor(102, 153, 204); 
 			hID[i] << ofToString(idHand[i]) << endl;
@@ -506,43 +510,59 @@ void kinectApp::drawDetails() {
 		}
 	}
 	
-	/*
 	if (!objects) { for (int i = 0; i < contourFinder.blobs.size(); i++){
-		idObject[i] = 0; aObject[i] = 0; bObject[i] = 0; cObject[i] = 0; } //cObject2[i] = 0; 
+		idObject[i] = 0; aObject[i] = 0; bObject[i] = 0; cObject[i] = 0; } 
 	}
-	if(objects == true){
+	if(objects){
 		for (int i = 0; i < contourFinder.blobs.size(); i++){ // i < nrObjects; ?
 			idObject[i] = i+1;
 			aObject[i] = objectX[i] / width;
 			bObject[i] = objectY[i] / height;
 			cObject[i] = objectZ[i] / 10000; 
-			//cObject2[i] = objectZ2[i] / 10000; 
-
-			//if ((int)idObject[i] > nrObjects || (int)idObject[i] < 0) { idObject[i] = 0; }
-			if ((int)aObject[i] > 1 || (int)aObject[i] < 0) { aObject[i] = 0; }
-			if ((int)bObject[i] > 1 || (int)bObject[i] < 0) { bObject[i] = 0; }
-			if ((int)cObject[i] > 1 || (int)cObject[i] < 0) { cObject[i] = 0; }
-			//if ((int)cObject2[i] > 1 || (int)cObject2[i] < 0) { cObject2[i] = 0; }
-
-			if (contourFinder.blobs.size() > 0){
+			
+			//if (contourFinder.blobs.size() > 0){
 				stringstream oID[20];
 				ofSetColor(204, 204, 204);
 				oID[i] << ofToString(idObject[i]) << endl;
 				usedFont.drawString(oID[i].str(), objectX[i]*0.5-5, objectY[i]*0.5+2);
 				ofSetColor(255, 255, 255);				
-			}
+			//}
 		}
-	}*/
+	}
 
 	ofPopMatrix();
 
 }
 
 //--------------------------------------------------------------
-/*
-void kinectApp::objectGenerator(){
+unsigned char* kinectApp::getDepthPixels(int nearThreshold , int farThreshold) {
+	
+	//if (MAX_NUMBER_DEPTHS == 1) {
+		const XnDepthPixel* objDepth = openNIDevices[0].getDepthGenerator().GetDepthMap();
+		
+		int numPixels = width * height;
+		for(int i = 0; i < numPixels; i++, objDepth++) {
+			//objDepth++;
+			if(*objDepth < farThreshold && *objDepth > nearThreshold) {
+				//maskPixels[0][i] = 255;
+				maskPixels[0][i] = ofMap(*objDepth, nearThreshold, farThreshold, 255, 0); // changed by mihoo, 2012-Feb-11
+			} 
+			else { maskPixels[0][i] = 0; }
+		}
+		
+	//} else printf("You sure you want to use this method not getDepthPixels(int forDepthThresholdNumber)?? There are multiple depth thresholds defined");
+		
+	return maskPixels[0];
+}
 
-	unsigned char * rawPixels = sceneDepth.getDepthPixels(0, sceneDepth.getMaxDepth());
+//--------------------------------------------------------------
+void kinectApp::objectGenerator(){
+	
+	/*ofPixels test1;
+	test1 = openNIDevices[0].getDepthPixels();
+	test1.resize(width, height, OF_INTERPOLATE_NEAREST_NEIGHBOR);*/
+
+	unsigned char * rawPixels = getDepthPixels(0, 10000); //test1.getPixels(); //sceneDepth.getDepthPixels(0, sceneDepth.getMaxDepth());
 	sourceImg.setFromPixels(rawPixels, width, height);
 	sourceImg.flagImageChanged();
 
@@ -577,7 +597,6 @@ void kinectApp::objectGenerator(){
 				objectY[i] = contourFinder.blobs[i].centroid.y;
 	}
 }
-*/
 
 //--------------------------------------------------------------
 void kinectApp::communicateViaOsc(){
@@ -846,12 +865,11 @@ void kinectApp::userEvent(ofxOpenNIUserEvent & event){
 }*/
 
 //--------------------------------------------------------------
-
-//--------------------------------------------------------------
 void kinectApp::handEvent(ofxOpenNIHandEvent & event){
     ofLogNotice() << event.id << getHandStatusAsString(event.handStatus) << "from device" << event.deviceID << "at" << event.timestampMillis;
 }
 
+//--------------------------------------------------------------
 void kinectApp::exit(){
     // this often does not work -> it's a known bug -> but calling it on a key press or anywhere that isnt std::aexit() works
     // press 'x' to shutdown cleanly...

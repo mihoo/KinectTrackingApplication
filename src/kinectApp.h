@@ -12,6 +12,7 @@
 #include "ofxXmlSettings.h"
 
 #define MAX_DEVICES 2
+#define MAX_NUMBER_DEPTHS 4
 
 //class ofxOpenNI;
 //class ofxOpenNIUser;
@@ -91,6 +92,11 @@ public:
 
 	ofxOpenNIUser sceneUser;
 	ofxOpenNIHand sceneHandTracker;
+	ofxOpenNIDepthThreshold objectsDepth;
+	
+	unsigned char* getDepthPixels(int nearThreshold, int farThreshold);
+	unsigned char* maskPixels[MAX_NUMBER_DEPTHS];
+
 
 	//ofxOpenNIContext	sceneContext;
 	//ofxDepthGenerator	sceneDepth, sceneDepth2;
@@ -114,8 +120,8 @@ public:
 
 	ofImage		depthRangeMask;
 	//ofTexture	allUserMasks, userMask[4];
-	ofxCvGrayscaleImage kinectImage, userImg[4];
-
+	ofxCvGrayscaleImage userImg[4];
+	ofxCvGrayscaleImage kinectImage;
 
 	// blob tracking with ofxOpenCV
 	void	objectGenerator();
