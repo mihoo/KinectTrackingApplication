@@ -8,7 +8,7 @@ int main( ){
 //int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd){ // use this with project properties-linker-system-subsystem: Windows (/SUBSYSTEM:WINDOWS)
 
     ofAppGlutWindow window;
-	ofSetupOpenGL(&window, 975, 840, OF_WINDOW);			// <-------- setup the GL context
+	ofSetupOpenGL(&window, 905, 730, OF_WINDOW);			// <-------- setup the GL context
 
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN

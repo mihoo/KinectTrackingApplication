@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 11.03.2012 22:15:07 gestartet.
+﻿Der Buildvorgang wurde am 18.03.2012 22:49:57 gestartet.
      1>Projekt "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\opencvExample.vcxproj" auf Knoten "2", rebuild Ziel(e).
      1>_PrepareForClean:
          Die Datei "obj\Release\Kinect.lastbuildstate" wird gelöscht.
@@ -455,11 +455,25 @@
          opencvExample.vcxproj -> C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\bin\Kinect.exe
        Manifest:
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"bin\Kinect.exe;#1" /manifest obj\Release\Kinect.exe.intermediate.manifest
+       PostBuildEvent:
+         Description: adding DLLs and creating data folder
+         xcopy /e /i /y "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\*.dll" "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\bin"
+         if not exist "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\bin\data" mkdir  "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\bin\data"
          
-     1>mt.exe : general error c101008d: Failed to write the updated manifest to the resource of file "bin\Kinect.exe". Der Prozess kann nicht auf die Datei zugreifen, da sie von einem anderen Prozess verwendet wird.
-         
-     1>Die Erstellung des Projekts "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\opencvExample.vcxproj" ist abgeschlossen, rebuild Ziel(e) -- FEHLER.
+         :VCEnd
+         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\Assimp32.dll
+         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\fmodex.dll
+         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\fmodexL.dll
+         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\FreeImage.dll
+         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\FreeType-6.dll
+         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\glut32.dll
+         C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\\..\..\..\export\vs2010\Zlib.dll
+         7 Datei(en) kopiert
+       FinalizeBuildStatus:
+         Die Datei "obj\Release\Kinect.unsuccessfulbuild" wird gelöscht.
+         Aktualisieren des Timestamps von "obj\Release\Kinect.lastbuildstate".
+     1>Die Erstellung des Projekts "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\opencvExample.vcxproj" ist abgeschlossen, rebuild Ziel(e).
 
-Fehler beim Erstellen
+Das Erstellen war erfolgreich.
 
-Verstrichene Zeit 00:02:03.07
+Verstrichene Zeit 00:01:55.89

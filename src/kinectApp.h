@@ -1,8 +1,6 @@
 #ifndef _KINECT_APP
 #define _KINECT_APP
 
-#define USE_IR // Comment this to use RGB instead of infrared cam...
-
 #include "ofxOpenNI.h"
 #include "ofMain.h"
 #include "ofxGuiApp.h"
@@ -12,11 +10,6 @@
 #include "ofxXmlSettings.h"
 
 #define MAX_DEVICES 2
-#define MAX_NUMBER_DEPTHS 4
-
-//class ofxOpenNI;
-//class ofxOpenNIUser;
-//class ofxOpenNIHand;
 
 class kinectApp : public ofxGuiApp, public ofxCvGrayscaleImage {
 
@@ -39,11 +32,13 @@ public:
 	// gui
 	void	setupGui();
 	void	handleGui(int parameterId, int task, void* data, int length);
+	void    basicGui();
+	void	objectGui();
 
 	ofTrueTypeFont usedFont;
 	
 	string statusConnection;
-	string statusNetwork;
+	string statusConfig;
 	string statusHands;
 	string statusSkeletons;
 	string statusObjects;
@@ -84,7 +79,8 @@ public:
 	void exit();
 
 	int numDevices, bUsers01;
-	ofxOpenNI openNIDevices[MAX_DEVICES];
+	//ofxOpenNI openNIDevices[MAX_DEVICES];
+	ofxOpenNI openNIDevices;
     
     void userEvent(ofxOpenNIUserEvent & event);
 	//void gestureEvent(ofxOpenNIGestureEvent & event);
@@ -95,20 +91,7 @@ public:
 	ofxOpenNIDepthThreshold objectsDepth;
 	
 	unsigned char* getDepthPixels(int nearThreshold, int farThreshold);
-	unsigned char* maskPixels[MAX_NUMBER_DEPTHS];
-
-
-	//ofxOpenNIContext	sceneContext;
-	//ofxDepthGenerator	sceneDepth, sceneDepth2;
-
-#ifdef USE_IR
-	//ofxIRGenerator		sceneImage;
-#else
-	//ofxImageGenerator	sceneImage;
-#endif
-
-	//ofxHandGenerator	sceneHandTracker;
-	//ofxUserGenerator	sceneUser;
+	unsigned char* maskPixels;
 
 #if defined (TARGET_OSX) //|| defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
 	ofxHardwareDriver	hardware;
@@ -123,6 +106,7 @@ public:
 	ofxCvGrayscaleImage userImg[4];
 	ofxCvGrayscaleImage kinectImage;
 
+
 	// blob tracking with ofxOpenCV
 	void	objectGenerator();
 
@@ -133,22 +117,17 @@ public:
 
 	ofxCvGrayscaleImage	sourceImg;
 	ofxCvGrayscaleImage	singleSourceImg[20];
-	//ofxCvGrayscaleImage	filteredImg;
 	ofxCvGrayscaleImage	blobImg[20];
 
-	unsigned char * singlePixels[20];
+	//unsigned char * singlePixels[20];
 	ofPixels		objPix[20];
 	ofColor			colOfPix[20];
-
-	//ofColor newCol[4];
 
 	float	objectX[20], objectY[20], objectZ[20], objectZ2[20];
 
 	int		location, fullsize, grayVal;
 	int		nearThreshold, farThreshold, minBlobSize, maxBlobSize;
 
-	//float	x1, x2, x3;
-	//float	y1, y2, y3; 
 
 	// ofxOSC
 	void			communicateViaOsc();

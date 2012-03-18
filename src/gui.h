@@ -12,12 +12,12 @@ const string cam_view[] =
 {
 	"Infrared",
 	"Depth",
-	"Off"
+	"None"
 };
 
 bool ir, depth, off, skel, hands, objects, oscHands01, oscSkeletons01, oscSkeletons02, oscObjects01, oscObjects02, save, load, reset, network, resetOsc;
 
-ofxGuiPanel	*camOptions, *trackOptions, *sendigViaOSC, *xmlConfig, *oscConfig, *camRotation, *objectTrackingOptions, *imageProcessingOptions;
+ofxGuiPanel	*camOptions, *trackOptions, *sendigViaOSC, *xmlConfig, *oscConfig, *camRotation, *objectTrackingOptions, *backgProcessingOptions, *imageProcessingOptions, *showProcessedImages;
 
 enum {
 	switchPanel01,
@@ -26,6 +26,7 @@ enum {
 	switchButton03,
 	switchButton04,
 	switchButton05,	
+	switchButton11,
 	switchButton06,
 	switchButton07,
 	switchButton08,
@@ -67,45 +68,7 @@ void kinectApp::setupGui(){
 	network = false;
 	resetOsc = false;
 
-	camOptions = gui->addPanel(0, "Camera Options", 355, 15, 12, OFXGUI_PANEL_SPACING);
-	camOptions->addButton(switchButton01, "Connection", 10, 10, isLive, kofxGui_Button_Switch, "");
-	camOptions->addSwitch(switchPanel01, "View", 120, 15, 0, 2, 1, &cam_view[0]);
-	camOptions->mObjWidth = 150;
-	camOptions->mObjHeight = 95;
-
-	trackOptions = gui->addPanel(1, "Tracking Format", 520, 15, 12, OFXGUI_PANEL_SPACING);
-	trackOptions->addButton(switchButton02, "Track Hands", 10, 10, hands, kofxGui_Button_Switch, "");
-	trackOptions->addButton(switchButton03, "Track Skeletons", 10, 10, skel, kofxGui_Button_Switch, "");
-	trackOptions->addButton(switchButton04, "Track Objects", 10, 10, objects, kofxGui_Button_Switch, "");
-	trackOptions->mObjWidth = 155;
-	trackOptions ->mObjHeight = 95;
-
-	sendigViaOSC = gui->addPanel(2, "Communication via OSC", 355, 125, 12, OFXGUI_PANEL_SPACING);
-	sendigViaOSC->addButton(switchButton06, "Hands' ID and central X-Y-Z-Position", 10, 10, oscHands01, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton07, "Skeletons' ID and central X-Y-Z-Position", 10, 10, oscSkeletons01, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton08, "Bone-Positions of Skeletons", 10, 10, oscSkeletons02, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton09, "Objects' ID and central X-Y-Z-Position", 10, 10, oscObjects01, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton10, "Width-Height-Size of Objects", 10, 10, oscObjects02, kofxGui_Button_Switch, "");
-	sendigViaOSC->mObjWidth = 320;
-	sendigViaOSC->mObjHeight = 150;
-
-	xmlConfig = gui->addPanel(5, "Manage Settings", 690, 15, 12, OFXGUI_PANEL_SPACING);
-	xmlConfig->addButton(triggerButton04, "Save Configuration", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->addButton(triggerButton05, "Load Configuration", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->addButton(triggerButton06, "Reset Configuration", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->mObjWidth = 150;
-	xmlConfig->mObjHeight = 95;
-		
-	oscConfig = gui->addPanel(5, "OSC Settings", 690, 125, 12, OFXGUI_PANEL_SPACING);
-	oscConfig->addButton(triggerButton02, "Use my Network Setup", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	oscConfig->addButton(triggerButton03, "Use Localhost at Port 3333", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	oscConfig->mObjWidth = 275;
-	oscConfig->mObjHeight = 75;
-
-	camRotation= gui->addPanel(5, "Vertical Camera Rotation", 690, 215, 12, OFXGUI_PANEL_SPACING);
-	camRotation->addSlider(slider10, "", 250, 15, -33, 33, rotation, kofxGui_Display_Int, 1);
-	camRotation->mObjWidth = 275;
-	camRotation->mObjHeight = 60;
+	basicGui();
 	
 	gui->forceUpdate(false);
 	gui->activate(true);
@@ -135,30 +98,8 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 			break;
 		case switchButton04:
 			objects = !objects;	
-			if(objects == true){
-			objectTrackingOptions = gui->addPanel(3, "Object Dimensions", 690, 295, 12, OFXGUI_PANEL_SPACING);
-			objectTrackingOptions->addSlider(slider01, "Nearest Distance", 250, 15, 1, 10000, nearThreshold, kofxGui_Display_Int, 1);
-			objectTrackingOptions->addSlider(slider02, "Furthest Distance", 250, 15, 1, 10000, farThreshold, kofxGui_Display_Int, 1);
-			//objectTrackingOptions->addSlider(slider02, "Furthest Distance", 250, 15, 1, sceneDepth.getMaxDepth(), farThreshold, kofxGui_Display_Int, 1);
-			objectTrackingOptions->addSlider(slider03, "Min-Size of Object", 250, 15, 0, 200000, minBlobSize, kofxGui_Display_Int, 1);
-			objectTrackingOptions->addSlider(slider04, "Max-Size of Object", 250, 15, 0, 200000, maxBlobSize, kofxGui_Display_Int, 1);
-			objectTrackingOptions->mObjWidth = 275;
-			objectTrackingOptions->mObjHeight = 205;
-			
-			imageProcessingOptions = gui->addPanel(4, "Image Processing", 690, 510, 12, OFXGUI_PANEL_SPACING);
-			imageProcessingOptions->addButton(triggerButton01, "Capture Background", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-			imageProcessingOptions->addButton(switchButton05, "Add  Background", 10, 10, kofxGui_Button_Off, kofxGui_Button_Switch, "");
-			imageProcessingOptions->addSlider(slider05, "Image Threshold", 175, 15, 0, 250, filters->threshold, kofxGui_Display_Int, 1); // max = 300 (200)
-			imageProcessingOptions->addSlider(slider06, "Smooth Image", 50, 15, 0, 25, filters->smooth, kofxGui_Display_Int, 1); // max = 15
-			imageProcessingOptions->addSlider(slider07, "Blur Edges", 150, 15, 0, 200, filters->highpBlur, kofxGui_Display_Int, 1);
-			imageProcessingOptions->addSlider(slider08, "Reduce Noise", 100, 15, 0, 50, filters->highpNoise, kofxGui_Display_Int, 1); // max = 30
-			imageProcessingOptions->addSlider(slider09, "Amplify Weak Areas", 200, 15, 1, 300, filters->amp, kofxGui_Display_Int, 1);
-			imageProcessingOptions->mObjWidth = 275;
-			imageProcessingOptions->mObjHeight = 280;
-			}
-			else if(objects == false){
-				gui->mObjects.resize(6);
-			}
+			if(objects == true){ objectGui(); }
+			else if(objects == false){ gui->mObjects.resize(5); }
 			break;
 
 		case switchButton06:
@@ -181,7 +122,7 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 			if(length == sizeof(bool))
 				network = !network;
 				if (network){
-					XMLosc.loadFile("oscConfiguration.xml");
+					XMLosc.loadFile("oscConfig.xml");
 					host = XMLosc.getValue("OSCCONFIGURATION:NETWORK:HOST", "127.0.0.1");
 					port = XMLosc.getValue("OSCCONFIGURATION:NETWORK:PORT", 3333);
 					sender.setup(host, port);
@@ -202,7 +143,7 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 				save = !save;
 				if (save){
 					savePersonalConfiguration();
-					statusNetwork = "saved";
+					statusConfig = "saved";
 				}
 			break;
 		case triggerButton05:
@@ -210,7 +151,7 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 				load = !load;
 				if (load){
 					loadPersonalConfiguration();
-					statusNetwork = "loaded";
+					statusConfig = "loaded";
 				}
 			break;
 		case triggerButton06:
@@ -218,7 +159,7 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 				reset = !reset;
 				if (reset){
 					resetConfiguration();
-					statusNetwork = "reset";
+					statusConfig = "reset";
 				}
 			break;
 
@@ -250,6 +191,10 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 		case switchButton05:
 			if(length == sizeof(bool))
 				filters->all = !filters->all;
+			break;
+		case switchButton11:
+			if(length == sizeof(bool))
+				//filters->processFilt = !filters->processFilt;
 			break;
 		case slider05:
 			if(length == sizeof(float)){
@@ -306,34 +251,31 @@ void kinectApp::savePersonalConfiguration(){
 	XML.setValue("PERSONALCONFIGURATION:OBJECTTRACKOPTIONS:FARTHRESH", farThreshold);
 	XML.setValue("PERSONALCONFIGURATION:OBJECTTRACKOPTIONS:MINBLOBSIZE", minBlobSize);
 	XML.setValue("PERSONALCONFIGURATION:OBJECTTRACKOPTIONS:MAXBLOBSIZE", maxBlobSize);
+
+	XML.setValue("PERSONALCONFIGURATION:BGPROCESSOPTIONS:CAPTUREBG", filters->background);
+	XML.setValue("PERSONALCONFIGURATION:BGPROCESSOPTIONS:ADDBG", filters->all);
 	
-	XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:CAPTUREBG", filters->background);
-	XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:ADDBG", filters->all);
-	XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:THRESHOLD", filters->threshold);
+	//XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:THRESHOLD", filters->threshold);
 	XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:SMOOTH", filters->smooth);
 	XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSBLUR", filters->highpBlur);
 	XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSNOISE", filters->highpNoise);
 	XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSAMP", filters->amp);
+	//XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:PROCESSEDIMGS", filters->processFilt);
 	
-	XML.saveFile("personalConfiguration.xml");
+	XML.saveFile("personalConfig.xml");
 }
 
 void kinectApp::loadPersonalConfiguration(){
 
 	gui->mObjects.resize(0);
 
-	XML.loadFile("personalConfiguration.xml");
+	XML.loadFile("personalConfig.xml");
 
 	isLive	=	XML.getValue("PERSONALCONFIGURATION:CAMOPTIONS:CONNECTION", 1);
 	ir		=	XML.getValue("PERSONALCONFIGURATION:CAMOPTIONS:VIEW:INFRARED", 0);
 	depth	=	XML.getValue("PERSONALCONFIGURATION:CAMOPTIONS:VIEW:DEPTH", 1);
 	off		=	XML.getValue("PERSONALCONFIGURATION:CAMOPTIONS:VIEW:OFF", 0);
 
-	int a, b;
-	a = hands;
-	b =	XML.getValue("PERSONALCONFIGURATION:TRACKOPTIONS:HANDS", 0);
-	if (a == b){ hands = b; }
-	else if (a != b) { hands = b; }
 	hands	=	XML.getValue("PERSONALCONFIGURATION:TRACKOPTIONS:HANDS", 0);
 	skel	=	XML.getValue("PERSONALCONFIGURATION:TRACKOPTIONS:SKELETONS", 0);
 	objects	=	XML.getValue("PERSONALCONFIGURATION:TRACKOPTIONS:OBJECTS", 0);
@@ -349,76 +291,19 @@ void kinectApp::loadPersonalConfiguration(){
 	minBlobSize			=	XML.getValue("PERSONALCONFIGURATION:OBJECTTRACKOPTIONS:MINBLOBSIZE", 1500);
 	maxBlobSize			=	XML.getValue("PERSONALCONFIGURATION:OBJECTTRACKOPTIONS:MAXBLOBSIZE", 10000);
 	
-	filters->background	=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:CAPTUREBG", 0);
-	filters->all		=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:ADDBG", 0);
-	filters->threshold	=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:THRESHOLD", 0);
+	filters->background	=	XML.getValue("PERSONALCONFIGURATION:BGPROCESSOPTIONS:CAPTUREBG", 0);
+	filters->all		=	XML.getValue("PERSONALCONFIGURATION:BGPROCESSOPTIONS:ADDBG", 0);
+
+	//filters->threshold	=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:THRESHOLD", 0);
 	filters->smooth		=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:SMOOTH", 0);
 	filters->highpBlur	=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSBLUR", 0);
 	filters->highpNoise	=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSNOISE", 0);
 	filters->amp		=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSAMP", 1);
-
-	camOptions = gui->addPanel(0, "Camera Options", 355, 15, 12, OFXGUI_PANEL_SPACING);
-	camOptions->addButton(switchButton01, "Connection", 10, 10, isLive, kofxGui_Button_Switch, "");
-	if( ir && !depth && !off ){ camOptions->addSwitch(switchPanel01, "View", 120, 15, 0, 2, 0, &cam_view[0]); }
-	if( !ir && depth && !off ){ camOptions->addSwitch(switchPanel01, "View", 120, 15, 0, 2, 1, &cam_view[0]); }
-	if( !ir && !depth && off ){ camOptions->addSwitch(switchPanel01, "View", 120, 15, 0, 2, 2, &cam_view[0]); }
-	camOptions->mObjWidth = 150;
-	camOptions->mObjHeight = 95;
-
-	trackOptions = gui->addPanel(1, "Tracking Format", 520, 15, 12, OFXGUI_PANEL_SPACING);
-	trackOptions->addButton(switchButton02, "Track Hands", 10, 10, hands, kofxGui_Button_Switch, "");
-	trackOptions->addButton(switchButton03, "Track Skeletons", 10, 10, skel, kofxGui_Button_Switch, "");
-	trackOptions->addButton(switchButton04, "Track Objects", 10, 10, objects, kofxGui_Button_Switch, "");
-	trackOptions->mObjWidth = 155;
-	trackOptions ->mObjHeight = 95;
-
-	sendigViaOSC = gui->addPanel(2, "Communication via OSC", 355, 125, 12, OFXGUI_PANEL_SPACING);
-	sendigViaOSC->addButton(switchButton06, "Hands' ID and central X-Y-Z-Position", 10, 10, oscHands01, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton07, "Skeletons' ID and central X-Y-Z-Position", 10, 10, oscSkeletons01, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton08, "Bone-Positions of Skeletons", 10, 10, oscSkeletons02, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton09, "Objects' ID and central X-Y-Z-Position", 10, 10, oscObjects01, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton10, "Width-Height-Size of Objects", 10, 10, oscObjects02, kofxGui_Button_Switch, "");
-	sendigViaOSC->mObjWidth = 320;
-	sendigViaOSC->mObjHeight = 150;
-
-	xmlConfig = gui->addPanel(5, "Manage Settings", 690, 15, 12, OFXGUI_PANEL_SPACING);
-	xmlConfig->addButton(triggerButton04, "Save Configuration", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->addButton(triggerButton05, "Load Configuration", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->addButton(triggerButton06, "Reset Configuration", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->mObjWidth = 150;
-	xmlConfig->mObjHeight = 95;
-		
-	oscConfig = gui->addPanel(5, "OSC Settings", 690, 125, 12, OFXGUI_PANEL_SPACING);
-	oscConfig->addButton(triggerButton02, "Use my Network Setup", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	oscConfig->addButton(triggerButton03, "Use Localhost at Port 3333", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	oscConfig->mObjWidth = 275;
-	oscConfig->mObjHeight = 75;
-
-	camRotation= gui->addPanel(5, "Vertical Camera Rotation", 690, 215, 12, OFXGUI_PANEL_SPACING);
-	camRotation->addSlider(slider10, "", 250, 15, -33, 33, rotation, kofxGui_Display_Int, 1);
-	camRotation->mObjWidth = 275;
-	camRotation->mObjHeight = 60;
+	//filters->processFilt =  XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:PROCESSEDIMGS", 0);
 	
-	if(objects){
-		objectTrackingOptions = gui->addPanel(3, "Object Dimensions", 690, 295, 12, OFXGUI_PANEL_SPACING);
-		objectTrackingOptions->addSlider(slider01, "Nearest Distance", 250, 15, 1, 10000, nearThreshold, kofxGui_Display_Int, 1);
-		objectTrackingOptions->addSlider(slider02, "Furthest Distance", 250, 15, 1, 10000, farThreshold, kofxGui_Display_Int, 1);
-		objectTrackingOptions->addSlider(slider03, "Min-Size of Object", 250, 15, 0, 200000, minBlobSize, kofxGui_Display_Int, 1);
-		objectTrackingOptions->addSlider(slider04, "Max-Size of Object", 250, 15, 0, 200000, maxBlobSize, kofxGui_Display_Int, 1);
-		objectTrackingOptions->mObjWidth = 275;
-		objectTrackingOptions->mObjHeight = 205;
-		
-		imageProcessingOptions = gui->addPanel(4, "Image Processing", 690, 510, 12, OFXGUI_PANEL_SPACING);
-		imageProcessingOptions->addButton(triggerButton01, "Capture Background", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-		imageProcessingOptions->addButton(switchButton05, "Add  Background", 10, 10, kofxGui_Button_Off, kofxGui_Button_Switch, "");
-		imageProcessingOptions->addSlider(slider05, "Image Threshold", 175, 15, 0, 250, filters->threshold, kofxGui_Display_Int, 1); // max = 300 (200)
-		imageProcessingOptions->addSlider(slider06, "Smooth Image", 50, 15, 0, 25, filters->smooth, kofxGui_Display_Int, 1); // max = 15
-		imageProcessingOptions->addSlider(slider07, "Blur Edges", 150, 15, 0, 200, filters->highpBlur, kofxGui_Display_Int, 1);
-		imageProcessingOptions->addSlider(slider08, "Reduce Noise", 100, 15, 0, 50, filters->highpNoise, kofxGui_Display_Int, 1); // max = 30
-		imageProcessingOptions->addSlider(slider09, "Amplify Weak Areas", 200, 15, 1, 300, filters->amp, kofxGui_Display_Int, 1);
-		imageProcessingOptions->mObjWidth = 275;
-		imageProcessingOptions->mObjHeight = 280;
-	}
+	basicGui();
+
+	if(objects){ objectGui(); }
 }
 
 void kinectApp::resetConfiguration(){	
@@ -450,54 +335,91 @@ void kinectApp::resetConfiguration(){
 	
 	filters->background	=	0;
 	filters->all		=	0;
-	filters->threshold	=	0;
+	//filters->threshold	=	0;
+	//filters->processFilt =  0;
 	filters->smooth		=	0;
 	filters->highpBlur	=	0;
 	filters->highpNoise	=	0;
 	filters->amp		=	1;
 
-	camOptions = gui->addPanel(0, "Camera Options", 355, 15, 12, OFXGUI_PANEL_SPACING);
-	camOptions->addButton(switchButton01, "Connection", 10, 10, isLive, kofxGui_Button_Switch, "");
-	if( ir && !depth && !off ){ camOptions->addSwitch(switchPanel01, "View", 120, 15, 0, 2, 0, &cam_view[0]); }
-	if( !ir && depth && !off ){ camOptions->addSwitch(switchPanel01, "View", 120, 15, 0, 2, 1, &cam_view[0]); }
-	if( !ir && !depth && off ){ camOptions->addSwitch(switchPanel01, "View", 120, 15, 0, 2, 2, &cam_view[0]); }
-	camOptions->mObjWidth = 150;
-	camOptions->mObjHeight = 95;
+	basicGui();	
+}
 
-	trackOptions = gui->addPanel(1, "Tracking Format", 520, 15, 12, OFXGUI_PANEL_SPACING);
-	trackOptions->addButton(switchButton02, "Track Hands", 10, 10, hands, kofxGui_Button_Switch, "");
-	trackOptions->addButton(switchButton03, "Track Skeletons", 10, 10, skel, kofxGui_Button_Switch, "");
-	trackOptions->addButton(switchButton04, "Track Objects", 10, 10, objects, kofxGui_Button_Switch, "");
-	trackOptions->mObjWidth = 155;
+void kinectApp::basicGui(){
+
+	camOptions = gui->addPanel(0, "Camera", 11, 10, 12, OFXGUI_PANEL_SPACING);
+	camOptions->addButton(switchButton01, "Active", 10, 10, isLive, kofxGui_Button_Switch, "");
+	if( ir && !depth && !off ){ camOptions->addSwitch(switchPanel01, "View", 81, 15, 0, 2, 0, &cam_view[0]); }
+	if( !ir && depth && !off ){ camOptions->addSwitch(switchPanel01, "View", 81, 15, 0, 2, 1, &cam_view[0]); }
+	if( !ir && !depth && off ){ camOptions->addSwitch(switchPanel01, "View", 81, 15, 0, 2, 2, &cam_view[0]); }
+	camOptions->mObjWidth = 109;
+	camOptions->mObjHeight = 95;
+	
+	trackOptions = gui->addPanel(1, "Tracking", 130, 10, 12, OFXGUI_PANEL_SPACING);
+	trackOptions->addButton(switchButton02, "Hands", 10, 10, hands, kofxGui_Button_Switch, "");
+	trackOptions->addButton(switchButton03, "Skeletons", 10, 10, skel, kofxGui_Button_Switch, "");
+	trackOptions->addButton(switchButton04, "Objects", 10, 10, objects, kofxGui_Button_Switch, "");
+	trackOptions->mObjWidth = 110;
 	trackOptions ->mObjHeight = 95;
 
-	sendigViaOSC = gui->addPanel(2, "Communication via OSC", 355, 125, 12, OFXGUI_PANEL_SPACING);
-	sendigViaOSC->addButton(switchButton06, "Hands' ID and central X-Y-Z-Position", 10, 10, oscHands01, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton07, "Skeletons' ID and central X-Y-Z-Position", 10, 10, oscSkeletons01, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton08, "Bone-Positions of Skeletons", 10, 10, oscSkeletons02, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton09, "Objects' ID and central X-Y-Z-Position", 10, 10, oscObjects01, kofxGui_Button_Switch, "");
-	sendigViaOSC->addButton(switchButton10, "Width-Height-Size of Objects", 10, 10, oscObjects02, kofxGui_Button_Switch, "");
-	sendigViaOSC->mObjWidth = 320;
+	sendigViaOSC = gui->addPanel(2, "Communication via OSC", 680, 10, 12, OFXGUI_PANEL_SPACING);
+	sendigViaOSC->addButton(switchButton06, "/hands/ID-centralXYZ", 10, 10, oscHands01, kofxGui_Button_Switch, "");
+	sendigViaOSC->addButton(switchButton07, "/skeletons/ID-centralXYZ", 10, 10, oscSkeletons01, kofxGui_Button_Switch, "");
+	sendigViaOSC->addButton(switchButton08, "/skeletons/bones/... (README.txt)", 10, 10, oscSkeletons02, kofxGui_Button_Switch, "");
+	sendigViaOSC->addButton(switchButton09, "/objects/ID-centralXYZ", 10, 10, oscObjects01, kofxGui_Button_Switch, "");
+	sendigViaOSC->addButton(switchButton10, "/objects/width-height-size", 10, 10, oscObjects02, kofxGui_Button_Switch, "");
+	sendigViaOSC->mObjWidth = 215;
 	sendigViaOSC->mObjHeight = 150;
 
-	xmlConfig = gui->addPanel(5, "Manage Settings", 690, 15, 12, OFXGUI_PANEL_SPACING);
-	xmlConfig->addButton(triggerButton04, "Save Configuration", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->addButton(triggerButton05, "Load Configuration", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->addButton(triggerButton06, "Reset Configuration", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->mObjWidth = 150;
+	xmlConfig = gui->addPanel(3, "Configuration", 465, 10, 12, OFXGUI_PANEL_SPACING);
+	xmlConfig->addButton(triggerButton04, "Save to personalConfig.xml", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	xmlConfig->addButton(triggerButton05, "Load from personalConfig.xml", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	xmlConfig->addButton(triggerButton06, "Reset (Default Configuration)", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	xmlConfig->mObjWidth = 205;
 	xmlConfig->mObjHeight = 95;
 		
-	oscConfig = gui->addPanel(5, "OSC Settings", 690, 125, 12, OFXGUI_PANEL_SPACING);
-	oscConfig->addButton(triggerButton02, "Use my Network Setup", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	oscConfig->addButton(triggerButton03, "Use Localhost at Port 3333", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	oscConfig->mObjWidth = 275;
-	oscConfig->mObjHeight = 75;
+	oscConfig = gui->addPanel(4, "Port / Remote Address", 250, 10, 12, OFXGUI_PANEL_SPACING);
+	oscConfig->addButton(triggerButton02, "Load from oscConfig.xml", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	oscConfig->addButton(triggerButton03, "Reset (Default Settings)", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	oscConfig->mObjWidth = 205;
+	oscConfig->mObjHeight = 95;
 
-	camRotation= gui->addPanel(5, "Vertical Camera Rotation", 690, 215, 12, OFXGUI_PANEL_SPACING);
+	/*camRotation= gui->addPanel(5, "Vertical Camera Rotation", 690, 215, 12, OFXGUI_PANEL_SPACING);
 	camRotation->addSlider(slider10, "", 250, 15, -33, 33, rotation, kofxGui_Display_Int, 1);
 	camRotation->mObjWidth = 275;
-	camRotation->mObjHeight = 60;
-	
+	camRotation->mObjHeight = 60;*/
+}
+
+void kinectApp::objectGui(){
+	objectTrackingOptions = gui->addPanel(6, "Dimensioning / Distance", 680, 195, 12, OFXGUI_PANEL_SPACING);
+	objectTrackingOptions->addSlider(slider01, "Nearest Distance", 190, 15, 1, 10000, nearThreshold, kofxGui_Display_Int, 1);
+	objectTrackingOptions->addSlider(slider02, "Furthest Distance", 190, 15, 1, 10000, farThreshold, kofxGui_Display_Int, 1);
+	objectTrackingOptions->addSlider(slider03, "Min-Size of Object", 190, 15, 0, 200000, minBlobSize, kofxGui_Display_Int, 1);
+	objectTrackingOptions->addSlider(slider04, "Max-Size of Object", 190, 15, 0, 200000, maxBlobSize, kofxGui_Display_Int, 1);
+	objectTrackingOptions->mObjWidth = 210;
+	objectTrackingOptions->mObjHeight = 205;
+
+	backgProcessingOptions = gui->addPanel(7, "Background", 680, 405, 12, OFXGUI_PANEL_SPACING);
+	backgProcessingOptions->addButton(triggerButton01, "Capture Background", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	backgProcessingOptions->addButton(switchButton05, "Remove Background", 10, 10, filters->all, kofxGui_Button_Switch, "");
+	backgProcessingOptions->mObjWidth = 210;
+	backgProcessingOptions->mObjHeight = 95;
+		
+	imageProcessingOptions = gui->addPanel(8, "Image Filters", 680, 506, 12, OFXGUI_PANEL_SPACING);
+	//imageProcessingOptions->addSlider(slider05, "Image Threshold", 175, 15, 0, 250, filters->threshold, kofxGui_Display_Int, 1); // max = 300 (200)
+	imageProcessingOptions->addSlider(slider06, "Smooth Image", 190, 15, 0, 25, filters->smooth, kofxGui_Display_Int, 1); // max = 15
+	imageProcessingOptions->addSlider(slider07, "Blur Edges", 190, 15, 0, 200, filters->highpBlur, kofxGui_Display_Int, 1);
+	imageProcessingOptions->addSlider(slider08, "Reduce Noise", 190, 15, 0, 50, filters->highpNoise, kofxGui_Display_Int, 1); // max = 30
+	imageProcessingOptions->addSlider(slider09, "Amplify weak Areas", 190, 15, 1, 300, filters->amp, kofxGui_Display_Int, 1);
+	imageProcessingOptions->mObjWidth = 210;
+	imageProcessingOptions->mObjHeight = 205;
+
+	/*showProcessedImages = gui->addPanel(9, "", 680, 675, 12, OFXGUI_PANEL_SPACING);
+	showProcessedImages->addButton(switchButton11, "Show processed Images", 10, 10, filters->processFilt, kofxGui_Button_Switch, "");
+	showProcessedImages->mObjWidth = 210;
+	showProcessedImages->mObjHeight = 35;*/
+	//showProcessedImages->mGlobals->mBorderColor = ofRGBA(0xFFFFFF00);
+	//showProcessedImages->mGlobals->mCoverColor = ofRGBA(0x00000000);
 }
 
 #endif

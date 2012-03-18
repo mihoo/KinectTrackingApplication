@@ -17,8 +17,9 @@ class setfilter : public ofxCvGrayscaleImage {
 	void operator = ( const ofxCvColorImage& mom );
     void operator = ( const ofxCvFloatImage& mom );
 
-	void highpass (int blur01, int blur02 );
+	
 	void amplify ( setfilter& mom, float level );
+	void highpass (float blur01, float blur02 );
 };
 
 class filter {
@@ -37,10 +38,12 @@ class filter {
 		amp = 1;
 		background = 0;
 		all = 0;
+		//processFilt = 0;
 	}
 
-	int camWidth, camHeight, threshold, smooth, highpBlur, highpNoise, amp;
-	bool background, all;
+	int camWidth, camHeight, threshold, smooth;
+	float highpBlur, highpNoise, amp;
+	bool background, all, processFilt;
 	ofxCvGrayscaleImage grayImg;	
 	ofxCvGrayscaleImage grayBg;
     ofxCvGrayscaleImage subtractBg;
@@ -62,12 +65,19 @@ class applyfilter : public filter {
 		camWidth = w;
         camHeight = h;
 		grayImg.allocate(camWidth, camHeight);		//Gray Image
+		//grayImg.setUseTexture(false);
 		grayBg.allocate(camWidth, camHeight);		//Background Image
+		//grayBg.setUseTexture(false);
 		subtractBg.allocate(camWidth, camHeight);	//Background After subtraction
+		//subtractBg.setUseTexture(false);
         grayDiff.allocate(camWidth, camHeight);		//Difference Image between Background and Source
+		//grayDiff.setUseTexture(false);
 		highpassImg.allocate(camWidth, camHeight);	//Highpass Image
+		//highpassImg.setUseTexture(false);
 		ampImg.allocate(camWidth, camHeight);		//Amplied Image
+		//ampImg.setUseTexture(false);
 		floatBgImg.allocate(camWidth, camHeight);	//ofxShortImage used for simple dynamic background subtraction
+		//floatBgImg.setUseTexture(false);
 	}
 
 	void apply (setfilter& img){
@@ -76,33 +86,35 @@ class applyfilter : public filter {
 
 		grayImg = img;
 
-		if (background == true){
+		if (background){
             floatBgImg = img;
-			//grayBg = floatBgImg;  // not yet implemented
 			cvConvertScale( floatBgImg.getCvImage(), grayBg.getCvImage(), 255.0f/65535.0f, 0 );
 			grayBg.flagImageChanged();
             background = false;
         }
 
-		if (all == false){
+		if (all){
             //Background Subtraction
-			//cvSub(img.getCvImage(), grayBg.getCvImage(), img.getCvImage());
-			img.absDiff(grayBg, img);
-			img.flagImageChanged();
+			cvSub(img.getCvImage(), grayBg.getCvImage(), img.getCvImage());
+			//img.absDiff(grayBg, img);
         }
+		img.flagImageChanged();
 
-		img.blur((smooth * 2) + 1); //needs to be an odd number
-		subtractBg = img; //for drawing
+		if (smooth >= 0){ 
+			img.blur((smooth * 2) + 1); //needs to be an odd number
+			subtractBg = img; //for drawing
+		}
 
 		if (highpBlur > 0 || highpNoise > 0){
 			img.highpass(highpBlur, highpNoise);
 			highpassImg = img; //for drawing
 		}
+		img.flagImageChanged();
 
-		//if (amp >= 1){
+		if (amp >= 1){
 			img.amplify(img, amp);
 			ampImg = img; //for drawing
-		//}
+		}
 
 		img.threshold(threshold); //Threshold
 		
@@ -113,14 +125,16 @@ class applyfilter : public filter {
 
 		ofSetColor(255, 255, 255);
 
-		grayDiff.draw(680, 560, camWidth, camHeight);
+		grayDiff.draw(680, 0, camWidth, camHeight);
 		
-		grayImg.draw(682, 1078, 312, 232);
-		floatBgImg.draw(1006, 1078, 312, 232); 
-
-		subtractBg.draw(680, 1422, 208, 156); 
-		highpassImg.draw(896, 1422, 208, 156); 
-		ampImg.draw(1112, 1422, 208, 156); 
+		grayImg.draw(682, 558, 312, 232);
+		floatBgImg.draw(1006, 558, 312, 232);
+		
+		//if (processFilt){ 
+		subtractBg.draw(680, 878, 208, 156); 
+		highpassImg.draw(896, 878, 208, 156); 
+		ampImg.draw(1112, 878, 208, 156);
+		//}
 		
 	}
 };

@@ -1,7 +1,17 @@
 #include "filter.h"
 
 //--------------------------------------------------------------------------------
-void setfilter::highpass ( int blur01, int blur02 ) {
+void setfilter::amplify ( setfilter& mom, float level ) {
+
+	float scalef = level / 104.0; //128.0f
+
+	cvMul( mom.getCvImage(), mom.getCvImage(), cvImageTemp, scalef );
+	swapTemp();
+	flagImageChanged();
+}
+
+//--------------------------------------------------------------------------------
+void setfilter::highpass ( float blur01, float blur02 ) {
 	
 	//Blur Original Image
 	if(blur01 > 0) cvSmooth( cvImage, cvImageTemp, CV_BLUR , (blur01 * 2) + 1);
@@ -12,16 +22,6 @@ void setfilter::highpass ( int blur01, int blur02 ) {
 	//Blur Highpass to remove noise
 	if(blur02 > 0) cvSmooth( cvImageTemp, cvImageTemp, CV_BLUR , (blur02 * 2) + 1);
 
-	swapTemp();
-	flagImageChanged();
-}
-
-//--------------------------------------------------------------------------------
-void setfilter::amplify ( setfilter& mom, float level ) {
-
-	float scalef = level / 320.0f;
-
-	cvMul( mom.getCvImage(), mom.getCvImage(), cvImageTemp, scalef );
 	swapTemp();
 	flagImageChanged();
 }
