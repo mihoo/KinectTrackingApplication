@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 18.03.2012 22:49:57 gestartet.
+﻿Der Buildvorgang wurde am 23.03.2012 18:28:10 gestartet.
      1>Projekt "C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\opencvExample.vcxproj" auf Knoten "2", rebuild Ziel(e).
      1>_PrepareForClean:
          Die Datei "obj\Release\Kinect.lastbuildstate" wird gelöscht.
@@ -352,7 +352,7 @@
          kinectApp.cpp
      1>..\..\..\libs\openFrameworks\graphics\ofPixels.h(150): warning C4003: Nicht genügend übergebene Parameter für das Makro 'max'
      1>..\..\..\libs\openFrameworks\graphics\ofPixels.h(151): warning C4003: Nicht genügend übergebene Parameter für das Makro 'max'
-     1>src\kinectApp.cpp(894): warning C4060: switch-Anweisung enthält weder 'case'- noch 'default'-Marken
+     1>src\kinectApp.cpp(851): warning C4060: switch-Anweisung enthält weder 'case'- noch 'default'-Marken
          Code wird generiert...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"bin\Kinect.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\..\..\libs\glut\lib\vs2010 /LIBPATH:..\..\..\libs\rtAudio\lib\vs2010 /LIBPATH:..\..\..\libs\FreeImage\lib\vs2010 /LIBPATH:..\..\..\libs\freetype\lib\vs2010 /LIBPATH:..\..\..\libs\quicktime\lib\vs2010 /LIBPATH:..\..\..\libs\fmodex\lib\vs2010 /LIBPATH:..\..\..\libs\videoInput\lib\vs2010 /LIBPATH:..\..\..\libs\cairo\lib\vs2010 /LIBPATH:..\..\..\libs\glew\lib\vs2010 /LIBPATH:..\..\..\libs\glu\lib\vs2010 /LIBPATH:..\..\..\libs\Poco\lib\vs2010 /LIBPATH:..\..\..\libs\tess2\lib\vs2010 /LIBPATH:..\..\..\libs\openFrameworksCompiled\lib\vs2010 /LIBPATH:bin\data\openni\lib openframeworksLib.lib "cairo-static.lib" "pixman-1.lib" msimg32.lib OpenGL32.lib GLu32.lib kernel32.lib setupapi.lib glut32.lib rtAudio.lib videoInput.lib libfreetype.lib FreeImage.lib qtmlClient.lib dsound.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib glew32s.lib fmodex_vc.lib glu32.lib Vfw32.lib comctl32.lib PocoFoundationmd.lib PocoNetmd.lib PocoUtilmd.lib PocoXMLmd.lib Ws2_32.lib tess2.lib ..\..\..\addons\ofxOsc\libs\oscpack\lib\vs2010\oscpack.lib ..\..\..\addons\ofxAssimpModelLoader\libs\assimp\lib\vs2010\assimp.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_calib3d220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_contrib220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_core220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_features2d220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_flann220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_gpu220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_highgui220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_imgproc220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_legacy220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_ml220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_objdetect220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_ts220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_video220.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\opencv_lapack.lib ..\..\..\addons\ofxOpenCv\libs\opencv\lib\vs2010\zlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:atlthunk.lib /NODEFAULTLIB:LIBC.lib /NODEFAULTLIB:LIBCMT /MANIFEST /ManifestFile:"obj\Release\Kinect.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Users\mihoo\Downloads\Coding\Kinect-Zutaten\OpenFrameworks\OpenFrameworks_007\apps\addonsExamples\KinectApp\bin\Kinect.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"bin\Kinect.lib" /MACHINE:X86 obj\Release\ofxGui.obj
@@ -476,4 +476,4 @@
 
 Das Erstellen war erfolgreich.
 
-Verstrichene Zeit 00:01:55.89
+Verstrichene Zeit 00:01:54.78

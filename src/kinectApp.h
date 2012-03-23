@@ -9,13 +9,12 @@
 #include "ofxOsc.h"
 #include "ofxXmlSettings.h"
 
-#define MAX_DEVICES 2
 
 class kinectApp : public ofxGuiApp, public ofxCvGrayscaleImage {
 
 public:
 
-	// general
+	//---------- general functions & variables ----------//
 	void	setup();
 	void	update();
 	void	draw();
@@ -28,32 +27,15 @@ public:
 	void	mouseReleased(int x, int y, int button);
 	void	windowResized(int w, int h);
 
+	int		width, height;
+	int		nrHand, nrBody, nrObjects, idHand[8], idBody[4], idObject[20];
+	float	aHand[8], bHand[8], cHand[8], aBody[4], bBody[4], cBody[4], aObject[20], bObject[20], cObject[20], cObject2[20];
 
-	// gui
-	void	setupGui();
-	void	handleGui(int parameterId, int task, void* data, int length);
-	void    basicGui();
-	void	objectGui();
-
-	ofTrueTypeFont usedFont;
-	
-	string statusConnection;
-	string statusConfig;
-	string statusHands;
-	string statusSkeletons;
-	string statusObjects;
+	int 	frames, fps, differenceTime;
+	float	lastFPSlog;
 
 
-	// XML
-	void savePersonalConfiguration();
-	void loadPersonalConfiguration();
-	void resetConfiguration();
-
-	ofxXmlSettings XML;
-	ofxXmlSettings XMLosc;
-	
-
-	// drawing
+	//---------- for drawing ----------//
 	void	drawBack();
 	void	drawCamView();
 	void	drawAllHands();
@@ -63,35 +45,51 @@ public:
 
 	ofImage background;
 
-	int		width, height;
-			
-	int		nrHand, nrBody, nrObjects;
 
-	float	aHand[8], bHand[8], cHand[8], aBody[4], bBody[4], cBody[4], aObject[20], bObject[20], cObject[20], cObject2[20]; 
-	int		idHand[8], idBody[4], idObject[20];
+	//---------- gui ----------//
+	void	setupGui();
+	void	handleGui(int parameterId, int task, void* data, int length);
+	void    basicGui();
+	void	objectGui();
+
+	ofTrueTypeFont usedFont;
+
+	string statusConfig;
+	string statusHands;
+	string statusSkeletons;
+	string statusObjects;
 
 
-	// ofxOpenNI
+	//---------- XML ----------//
+	void savePersonalConfiguration();
+	void loadPersonalConfiguration();
+	void resetConfiguration();
+
+	ofxXmlSettings XML;
+	ofxXmlSettings XMLosc;
+
+
+	//---------- ofxOpenNI ----------//
 	void	setupScene();
 
 	bool	isLive;
 
-	void exit();
+	void	exit();
 
-	int numDevices, bUsers01;
-	//ofxOpenNI openNIDevices[MAX_DEVICES];
 	ofxOpenNI openNIDevices;
     
-    void userEvent(ofxOpenNIUserEvent & event);
-	//void gestureEvent(ofxOpenNIGestureEvent & event);
-	void handEvent(ofxOpenNIHandEvent & event);
+    void	userEvent(ofxOpenNIUserEvent & event);
+	void	gestureEvent(ofxOpenNIGestureEvent & event);
+	void	handEvent(ofxOpenNIHandEvent & event);
 
-	ofxOpenNIUser sceneUser;
-	ofxOpenNIHand sceneHandTracker;
-	ofxOpenNIDepthThreshold objectsDepth;
+	ofxOpenNIUser			sceneUser;
+	ofxOpenNIHand			sceneHandTracker;
+
+	ofxCvGrayscaleImage userImg[4];
+	ofxCvGrayscaleImage kinectImage;
 	
-	unsigned char* getDepthPixels(int nearThreshold, int farThreshold);
-	unsigned char* maskPixels;
+	unsigned char*		getDepthPixels(int nearThreshold, int farThreshold);
+	unsigned char*		maskPixels;
 
 #if defined (TARGET_OSX) //|| defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
 	ofxHardwareDriver	hardware;
@@ -99,51 +97,34 @@ public:
 	int rotation; // added by mihoo, 2012-Feb-17
 #endif
 
-	int rotation; // added by mihoo, 2012-Feb-17
-
-	ofImage		depthRangeMask;
-	//ofTexture	allUserMasks, userMask[4];
-	ofxCvGrayscaleImage userImg[4];
-	ofxCvGrayscaleImage kinectImage;
+	int			rotation; // added by mihoo, 2012-Feb-17
 
 
-	// blob tracking with ofxOpenCV
-	void	objectGenerator();
+	//---------- blob tracking with ofxOpenCV ----------//
+	void		objectGenerator();
 
 	ofxCvContourFinder	contourFinder;
 
-	filter*			filters;
-	setfilter		processedImg;
+	filter*		filters;
+	setfilter	processedImg;
 
 	ofxCvGrayscaleImage	sourceImg;
 	ofxCvGrayscaleImage	singleSourceImg[20];
 	ofxCvGrayscaleImage	blobImg[20];
+	ofPixels	objPix[20];
 
-	//unsigned char * singlePixels[20];
-	ofPixels		objPix[20];
-	ofColor			colOfPix[20];
+	float		objectX[20], objectY[20], objectZ[20];
 
-	float	objectX[20], objectY[20], objectZ[20], objectZ2[20];
-
-	int		location, fullsize, grayVal;
-	int		nearThreshold, farThreshold, minBlobSize, maxBlobSize;
+	int			fullsize, grayVal[20], nearThreshold, farThreshold, minBlobSize, maxBlobSize;
 
 
-	// ofxOSC
+	//---------- ofxOSC ----------//
 	void			communicateViaOsc();
 
 	ofxOscSender	sender;
 
 	string			host;
-	int				port;
-
-
-	//FPS variables
-	int 				frames;
-	int  				fps;
-	float				lastFPSlog;
-	int					differenceTime;
-
+	int				port;	
 };
 
 #endif

@@ -4,9 +4,9 @@
 #include "kinectApp.h"
 #include "filter.h"
 
+
 class kinectApp;
 class filter;
-
 
 const string cam_view[] =
 {
@@ -15,7 +15,11 @@ const string cam_view[] =
 	"None"
 };
 
-bool ir, depth, off, skel, hands, objects, oscHands01, oscSkeletons01, oscSkeletons02, oscObjects01, oscObjects02, save, load, reset, network, resetOsc;
+bool ir, depth, off;
+bool hands, skel, objects;
+bool save, load, reset;
+bool network, resetOsc;
+bool oscHands01, oscSkeletons01, oscSkeletons02, oscObjects01, oscObjects02;
 
 ofxGuiPanel	*camOptions, *trackOptions, *sendigViaOSC, *xmlConfig, *oscConfig, *camRotation, *objectTrackingOptions, *backgProcessingOptions, *imageProcessingOptions, *showProcessedImages;
 
@@ -26,7 +30,6 @@ enum {
 	switchButton03,
 	switchButton04,
 	switchButton05,	
-	switchButton11,
 	switchButton06,
 	switchButton07,
 	switchButton08,
@@ -50,23 +53,32 @@ enum {
 	slider10
 };
 
-void kinectApp::setupGui(){
 
+//--------------------------------------------------------------
+void kinectApp::setupGui(){
+	
+	//-- initialize variables & classes --// 
+
+	ir = false;
 	depth = true;
-	skel = false;
+	off = false;
+
 	hands = false;
+	skel = false;
 	objects = false; 
+
+	save = false;
+	load = false;
+	reset = false;
+
+	network = false;
+	resetOsc = false;
+
 	oscHands01 = false;
 	oscSkeletons01 = false;
 	oscSkeletons02 = false;
 	oscObjects01 = false;
 	oscObjects02 = false;
-
-	save = false;
-	load = false;
-	reset = false;
-	network = false;
-	resetOsc = false;
 
 	basicGui();
 	
@@ -74,10 +86,12 @@ void kinectApp::setupGui(){
 	gui->activate(true);
 }
 
+//--------------------------------------------------------------
 void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 		
 	switch(parameterId){
 		
+		//-- "Camera" menu --// 
 		case switchButton01:
 			isLive = !isLive;
 			break;
@@ -89,7 +103,8 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 				if(*(int*)data == 2){ ir = false; depth = false; off = true; }
 			}
 			break;
-
+		
+		//-- "Tracking" menu --// 
 		case switchButton02:
 			hands = !hands;
 			break;
@@ -102,42 +117,7 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 			else if(objects == false){ gui->mObjects.resize(5); }
 			break;
 
-		case switchButton06:
-			oscHands01 = !oscHands01;
-			break; 
-		case switchButton07:
-			oscSkeletons01 = !oscSkeletons01;
-			break;
-		case switchButton08:
-			oscSkeletons02 = !oscSkeletons02;
-			break;
-		case switchButton09:
-			oscObjects01 = !oscObjects01;
-			break;
-		case switchButton10:
-			oscObjects02 = !oscObjects02;
-			break;
-
-		case triggerButton02:
-			if(length == sizeof(bool))
-				network = !network;
-				if (network){
-					XMLosc.loadFile("oscConfig.xml");
-					host = XMLosc.getValue("OSCCONFIGURATION:NETWORK:HOST", "127.0.0.1");
-					port = XMLosc.getValue("OSCCONFIGURATION:NETWORK:PORT", 3333);
-					sender.setup(host, port);
-				}
-			break;
-		case triggerButton03:
-			if(length == sizeof(bool))
-				resetOsc = !resetOsc;
-				if (resetOsc){
-					host = "127.0.0.1";
-					port = 3333;
-					sender.setup(host, port);
-				}
-			break;
-
+		//-- "Configuration" menu --// 
 		case triggerButton04:
 			if(length == sizeof(bool))
 				save = !save;
@@ -163,6 +143,45 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 				}
 			break;
 
+		//-- "Port / Remote Address" menu --// 
+		case triggerButton02:
+			if(length == sizeof(bool))
+				network = !network;
+				if (network){
+					XMLosc.loadFile("oscConfig.xml");
+					host = XMLosc.getValue("OSCCONFIGURATION:NETWORK:HOST", "127.0.0.1");
+					port = XMLosc.getValue("OSCCONFIGURATION:NETWORK:PORT", 3333);
+					sender.setup(host, port);
+				}
+			break;
+		case triggerButton03:
+			if(length == sizeof(bool))
+				resetOsc = !resetOsc;
+				if (resetOsc){
+					host = "127.0.0.1";
+					port = 3333;
+					sender.setup(host, port);
+				}
+			break;
+		
+		//-- "Communication via OSC" menu --// 
+		case switchButton06:
+			oscHands01 = !oscHands01;
+			break; 
+		case switchButton07:
+			oscSkeletons01 = !oscSkeletons01;
+			break;
+		case switchButton08:
+			oscSkeletons02 = !oscSkeletons02;
+			break;
+		case switchButton09:
+			oscObjects01 = !oscObjects01;
+			break;
+		case switchButton10:
+			oscObjects02 = !oscObjects02;
+			break;
+
+		//-- object tracking: "Dimensioning / Distance" menu --//
 		case slider01:
 			if(length == sizeof(float)){
 				nearThreshold = *(float*)data;
@@ -183,24 +202,23 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 				maxBlobSize = *(float*)data;
 			}
 			break;
+
+		//-- object tracking: "Background" menu --//
 		case triggerButton01:
 			if(length == sizeof(bool))
 				filters->background = !filters->background;
 			break;
-
 		case switchButton05:
 			if(length == sizeof(bool))
 				filters->all = !filters->all;
 			break;
-		case switchButton11:
-			if(length == sizeof(bool))
-				//filters->processFilt = !filters->processFilt;
-			break;
-		case slider05:
+		
+		//-- object tracking: "Image Filters" menu --//
+		/*case slider05:
 			if(length == sizeof(float)){
 				filters->threshold = *(float*)data;
 			}
-			break;
+			break;*/
 		case slider06:
 			if(length == sizeof(float)){
 				filters->smooth = *(float*)data;
@@ -222,16 +240,22 @@ void kinectApp::handleGui(int parameterId, int task, void* data, int length){
 			}
 			break;
 		
-		case slider10:
+		//-- object tracking: "Vertical Camera Rotation" menu --//
+		//doesn't work on Windows, currently no driver support for cam rotation
+		/*case slider10:
 			if(length == sizeof(float)){
 				rotation = *(float*)data;
 			}
-			break;
+			break;*/
 	}
 
 }
 
+//--------------------------------------------------------------
 void kinectApp::savePersonalConfiguration(){
+
+	//-- save settings in XML-file --//
+
 	XML.setValue("PERSONALCONFIGURATION:CAMOPTIONS:CONNECTION", isLive);
 	XML.setValue("PERSONALCONFIGURATION:CAMOPTIONS:VIEW:INFRARED", ir);
 	XML.setValue("PERSONALCONFIGURATION:CAMOPTIONS:VIEW:DEPTH", depth);
@@ -260,12 +284,14 @@ void kinectApp::savePersonalConfiguration(){
 	XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSBLUR", filters->highpBlur);
 	XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSNOISE", filters->highpNoise);
 	XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSAMP", filters->amp);
-	//XML.setValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:PROCESSEDIMGS", filters->processFilt);
 	
 	XML.saveFile("personalConfig.xml");
 }
 
+//--------------------------------------------------------------
 void kinectApp::loadPersonalConfiguration(){
+
+	//-- load settings from XML-file --//
 
 	gui->mObjects.resize(0);
 
@@ -299,28 +325,35 @@ void kinectApp::loadPersonalConfiguration(){
 	filters->highpBlur	=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSBLUR", 0);
 	filters->highpNoise	=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSNOISE", 0);
 	filters->amp		=	XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:HIGHPASSAMP", 1);
-	//filters->processFilt =  XML.getValue("PERSONALCONFIGURATION:IMGPROCESSOPTIONS:PROCESSEDIMGS", 0);
 	
 	basicGui();
 
 	if(objects){ objectGui(); }
 }
 
+//--------------------------------------------------------------
 void kinectApp::resetConfiguration(){	
 	
+	//-- reset settings, same settings as at start of application --//
+
 	gui->mObjects.resize(0);
 	
 	isLive	=	1;
+
 	ir		=	0;
 	depth	=	1;
 	off		=	0;
 
-	if (hands){
-		hands	=	0;
-		//sceneHandTracker.toggleTrackHands();
-	}
+	hands	=	0;
 	skel	=	0;
 	objects	=	0;
+
+	save	=	0;
+	load	=	0;
+	reset	=	0;
+
+	network =	0;
+	resetOsc=	0;
 
 	oscHands01		=	0;
 	oscSkeletons01	=	0;
@@ -335,8 +368,8 @@ void kinectApp::resetConfiguration(){
 	
 	filters->background	=	0;
 	filters->all		=	0;
+	
 	//filters->threshold	=	0;
-	//filters->processFilt =  0;
 	filters->smooth		=	0;
 	filters->highpBlur	=	0;
 	filters->highpNoise	=	0;
@@ -345,8 +378,10 @@ void kinectApp::resetConfiguration(){
 	basicGui();	
 }
 
+//--------------------------------------------------------------
 void kinectApp::basicGui(){
 
+	//-- initialize "Camera" menu --//
 	camOptions = gui->addPanel(0, "Camera", 11, 10, 12, OFXGUI_PANEL_SPACING);
 	camOptions->addButton(switchButton01, "Active", 10, 10, isLive, kofxGui_Button_Switch, "");
 	if( ir && !depth && !off ){ camOptions->addSwitch(switchPanel01, "View", 81, 15, 0, 2, 0, &cam_view[0]); }
@@ -355,13 +390,30 @@ void kinectApp::basicGui(){
 	camOptions->mObjWidth = 109;
 	camOptions->mObjHeight = 95;
 	
+	//-- initialize "Tracking" menu --//
 	trackOptions = gui->addPanel(1, "Tracking", 130, 10, 12, OFXGUI_PANEL_SPACING);
 	trackOptions->addButton(switchButton02, "Hands", 10, 10, hands, kofxGui_Button_Switch, "");
 	trackOptions->addButton(switchButton03, "Skeletons", 10, 10, skel, kofxGui_Button_Switch, "");
 	trackOptions->addButton(switchButton04, "Objects", 10, 10, objects, kofxGui_Button_Switch, "");
 	trackOptions->mObjWidth = 110;
 	trackOptions ->mObjHeight = 95;
+		
+	//-- initialize "Configuration" menu --//
+	xmlConfig = gui->addPanel(3, "Configuration", 250, 10, 12, OFXGUI_PANEL_SPACING);
+	xmlConfig->addButton(triggerButton04, "Save to personalConfig.xml", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	xmlConfig->addButton(triggerButton05, "Load from personalConfig.xml", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	xmlConfig->addButton(triggerButton06, "Reset (Default Configuration)", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	xmlConfig->mObjWidth = 205;
+	xmlConfig->mObjHeight = 95;
+	
+	//-- initialize "Port / Remote Address" menu --//
+	oscConfig = gui->addPanel(4, "Port / Remote Address", 465, 10, 12, OFXGUI_PANEL_SPACING);
+	oscConfig->addButton(triggerButton02, "Load from oscConfig.xml", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	oscConfig->addButton(triggerButton03, "Reset (Default Settings)", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
+	oscConfig->mObjWidth = 205;
+	oscConfig->mObjHeight = 95;
 
+	//-- initialize "Communication via OSC" menu --//
 	sendigViaOSC = gui->addPanel(2, "Communication via OSC", 680, 10, 12, OFXGUI_PANEL_SPACING);
 	sendigViaOSC->addButton(switchButton06, "/hands/ID-centralXYZ", 10, 10, oscHands01, kofxGui_Button_Switch, "");
 	sendigViaOSC->addButton(switchButton07, "/skeletons/ID-centralXYZ", 10, 10, oscSkeletons01, kofxGui_Button_Switch, "");
@@ -371,26 +423,18 @@ void kinectApp::basicGui(){
 	sendigViaOSC->mObjWidth = 215;
 	sendigViaOSC->mObjHeight = 150;
 
-	xmlConfig = gui->addPanel(3, "Configuration", 465, 10, 12, OFXGUI_PANEL_SPACING);
-	xmlConfig->addButton(triggerButton04, "Save to personalConfig.xml", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->addButton(triggerButton05, "Load from personalConfig.xml", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->addButton(triggerButton06, "Reset (Default Configuration)", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	xmlConfig->mObjWidth = 205;
-	xmlConfig->mObjHeight = 95;
-		
-	oscConfig = gui->addPanel(4, "Port / Remote Address", 250, 10, 12, OFXGUI_PANEL_SPACING);
-	oscConfig->addButton(triggerButton02, "Load from oscConfig.xml", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	oscConfig->addButton(triggerButton03, "Reset (Default Settings)", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
-	oscConfig->mObjWidth = 205;
-	oscConfig->mObjHeight = 95;
-
+	//-- initialize "Vertical Camera Rotation" menu --//
+	//doesn't work on Windows, currently no driver support for cam rotation
 	/*camRotation= gui->addPanel(5, "Vertical Camera Rotation", 690, 215, 12, OFXGUI_PANEL_SPACING);
 	camRotation->addSlider(slider10, "", 250, 15, -33, 33, rotation, kofxGui_Display_Int, 1);
 	camRotation->mObjWidth = 275;
 	camRotation->mObjHeight = 60;*/
 }
 
+//--------------------------------------------------------------
 void kinectApp::objectGui(){
+
+	//-- initialize "Dimensioning / Distance" menu --//
 	objectTrackingOptions = gui->addPanel(6, "Dimensioning / Distance", 680, 195, 12, OFXGUI_PANEL_SPACING);
 	objectTrackingOptions->addSlider(slider01, "Nearest Distance", 190, 15, 1, 10000, nearThreshold, kofxGui_Display_Int, 1);
 	objectTrackingOptions->addSlider(slider02, "Furthest Distance", 190, 15, 1, 10000, farThreshold, kofxGui_Display_Int, 1);
@@ -399,12 +443,14 @@ void kinectApp::objectGui(){
 	objectTrackingOptions->mObjWidth = 210;
 	objectTrackingOptions->mObjHeight = 205;
 
+	//-- initialize "Background" menu --//
 	backgProcessingOptions = gui->addPanel(7, "Background", 680, 405, 12, OFXGUI_PANEL_SPACING);
 	backgProcessingOptions->addButton(triggerButton01, "Capture Background", 10, 10, kofxGui_Button_Off, kofxGui_Button_Trigger, "");
 	backgProcessingOptions->addButton(switchButton05, "Remove Background", 10, 10, filters->all, kofxGui_Button_Switch, "");
 	backgProcessingOptions->mObjWidth = 210;
 	backgProcessingOptions->mObjHeight = 95;
-		
+	
+	//-- initialize "Image Filters" menu --//
 	imageProcessingOptions = gui->addPanel(8, "Image Filters", 680, 506, 12, OFXGUI_PANEL_SPACING);
 	//imageProcessingOptions->addSlider(slider05, "Image Threshold", 175, 15, 0, 250, filters->threshold, kofxGui_Display_Int, 1); // max = 300 (200)
 	imageProcessingOptions->addSlider(slider06, "Smooth Image", 190, 15, 0, 25, filters->smooth, kofxGui_Display_Int, 1); // max = 15
@@ -413,13 +459,6 @@ void kinectApp::objectGui(){
 	imageProcessingOptions->addSlider(slider09, "Amplify weak Areas", 190, 15, 1, 300, filters->amp, kofxGui_Display_Int, 1);
 	imageProcessingOptions->mObjWidth = 210;
 	imageProcessingOptions->mObjHeight = 205;
-
-	/*showProcessedImages = gui->addPanel(9, "", 680, 675, 12, OFXGUI_PANEL_SPACING);
-	showProcessedImages->addButton(switchButton11, "Show processed Images", 10, 10, filters->processFilt, kofxGui_Button_Switch, "");
-	showProcessedImages->mObjWidth = 210;
-	showProcessedImages->mObjHeight = 35;*/
-	//showProcessedImages->mGlobals->mBorderColor = ofRGBA(0xFFFFFF00);
-	//showProcessedImages->mGlobals->mCoverColor = ofRGBA(0x00000000);
 }
 
 #endif
