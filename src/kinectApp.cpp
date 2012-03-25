@@ -6,7 +6,7 @@
 //--------------------------------------------------------------
 void kinectApp::setup() {
 	
-	ofSetWindowTitle("KinectApp");
+	ofSetWindowTitle("KinectA");
 
 
 	//-- initialize generals --// 
@@ -44,8 +44,6 @@ void kinectApp::setup() {
 
 	for (int i = 0; i < nrBody; i++){ userImg[i].allocate(width, height); }
 
-	rotation = 0;
-
 	
 	//-- initialize classes & variables for ofxOpenCV --// 
 	filters = NULL;
@@ -81,11 +79,6 @@ void kinectApp::setup() {
 //--------------------------------------------------------------
 void kinectApp::setupScene() {
 
-#if defined (TARGET_OSX) //|| defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
-	hardware.setup();				// libusb direct control of motor, LED and accelerometers
-	hardware.setLedOption(LED_OFF); // turn off the led just for yacks (or for live installation/performances ;-)
-#endif
-
 	ofSetLogLevel(OF_LOG_NOTICE);
     
     //openNIDevices.setLogLevel(OF_LOG_VERBOSE); // ofxOpenNI defaults to ofLogLevel, but you can force to any level
@@ -119,15 +112,12 @@ void kinectApp::setupScene() {
 	
 	//width = openNIDevices.getWidth(); 
 	//height = openNIDevices.getHeight();
+
 }
 
 //--------------------------------------------------------------
 void kinectApp::update(){
 
-#ifdef TARGET_OSX // only working on Mac at the moment
-	hardware.update();
-#endif
-	
 	//-- update status --// 
 	if(camOptions->mMouseIsDown  || trackOptions->mMouseIsDown || sendigViaOSC->mMouseIsDown || oscConfig->mMouseIsDown)
 		{ statusConfig = "new"; }
@@ -217,20 +207,6 @@ void kinectApp::draw(){
 		drawDetails();
 	}
 
-	string statusHardware;
-#ifdef TARGET_OSX // only working on Mac at the moment
-	ofPoint statusAccelerometers = hardware.getAccelerometers();
-	stringstream	statusHardwareStream;
-
-	statusHardwareStream
-	<< "ACCELEROMETERS:"
-	<< " TILT: " << hardware.getTiltAngle() << "/" << hardware.tilt_angle
-	<< " x - " << statusAccelerometers.x
-	<< " y - " << statusAccelerometers.y
-	<< " z - " << statusAccelerometers.z;
-
-	statusHardware = statusHardwareStream.str();
-#endif
 
 	ofSetColor (255, 255, 255);
 
@@ -238,8 +214,8 @@ void kinectApp::draw(){
 	//-- show FrameRate --// 
 	stringstream msgA;
 	msgA
-	//<< "FrameRate: " << ofToString(int(ofGetFrameRate())) << "  " << statusHardware << endl //uncomment this to get processed FrameRate
-	<< "FrameRate: " << ofToString(fps) << "  " << statusHardware << endl;
+	//<< "FrameRate: " << ofToString(int(ofGetFrameRate())) << endl //uncomment this to get processed FrameRate
+	<< "FrameRate: " << ofToString(fps) << "  " << endl;
 	usedFont.drawString(msgA.str(), 16, 126);
 
 
@@ -838,17 +814,6 @@ void kinectApp::exit(){
 //--------------------------------------------------------------
 void kinectApp::keyPressed(int key){
 
-	switch (key) {
-#ifdef TARGET_OSX // only working on Mac at the moment
-		case 357: // up key
-			hardware.setTiltAngle(hardware.tilt_angle++);
-			break;
-		case 359: // down key
-			hardware.setTiltAngle(hardware.tilt_angle--);
-			break;
-#endif
-
-	}
 }
 
 //--------------------------------------------------------------

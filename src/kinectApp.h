@@ -91,13 +91,6 @@ public:
 	unsigned char*		getDepthPixels(int nearThreshold, int farThreshold);
 	unsigned char*		maskPixels;
 
-#if defined (TARGET_OSX) //|| defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
-	ofxHardwareDriver	hardware;
-
-	int rotation; // added by mihoo, 2012-Feb-17
-#endif
-
-	int			rotation; // added by mihoo, 2012-Feb-17
 
 
 	//---------- blob tracking with ofxOpenCV ----------//
