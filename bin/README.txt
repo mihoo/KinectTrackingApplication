@@ -1,8 +1,19 @@
 ########## KINECTA - KINECT TRACKING APPLICATION ##########
 
-Application for motion tracking via KinectSensor - including hand, skeleton and object tracking. Hand and skeleton tracking base on the ofxOpenNI wrapper (by Matthew Gingold, http://gingold.com.au). Object Tracking bases on blob tracking via the ofxOpenCv wrapper.
-KinectA provides a clearly arranged interface with multiple configuration. Simple save and load functionalities are available for modifiable XML-files. Tracked information can be send via OSC to other hard- and software. It has been built with openFrameworks (http://www.openframeworks.cc).
-Download the project folder on github (https://github.com/mihoo/KinectTrackingApplication). Download application under http://www.mihoo.de/kinecta.html 
+KinectA is an application for motion tracking via KinectSensor - including hand, skeleton and object tracking. It provides a clearly arranged interface with multiple configuration. Simple save and load functionalities are available for modifiable XML-files. Tracked information can be send via OSC to other hard- and software.  
+
+Download the project folder on github (https://github.com/mihoo/KinectTrackingApplication). Download the compiled application under http://www.mihoo.de/kinecta.html 
+
+KinectA - Kinect Tracking Application / Copyright (C) 2011-2012  Michaela Honauer a.k.a. mihoo (http://www.mihoo.de/)
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. 
+You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+
+
+C++ FRAMEWORK AND ADD-ONS
+
+KinectA has been built with openFrameworks (http://www.openframeworks.cc). Hand and skeleton tracking base on the ofxOpenNI wrapper (by Matthew Gingold, http://gingold.com.au). Object Tracking bases on blob tracking via the ofxOpenCv core add-on. The interface has been designed with the ofxGui extension (by alphakana/ Stefan Kirch). The XML functionalities base on the ofxXmlSettings core add-on (by Lee Thomason, www.grinninglizard.com) and the OSC communication has been built with the ofxOsc core add-on (by Damian Stewart).
 
 
 
@@ -11,16 +22,16 @@ INSTALLATION AND DRIVERS
 WINDOWS
 (tested on Windows7 64bit, but installed 32bit-Versions of OpenNI, SensorKinect and NITE)
 1. Install unstable OpenNI Binaries (v1.5.2.23) from http://www.openni.org/Downloads/OpenNIModules.aspx
-2. Install SensorKinect (v5.1.0.25) from https://github.com/avin2/SensorKinect (you find the install file inside bin folder).
+2. Install SensorKinect (v5.1.0.25) from https://github.com/avin2/SensorKinect (you find the install .exe inside the bin folder).
 3. Install unstable NITE / OpenNI Middleware Binaries (v1.5.2.21) from http://www.openni.org/Downloads/OpenNIModules.aspx
-4. If it doesn't work install the driver for Kinect Camera manually (you find the drivers inside the platform folder of Sensor Kinect) and restart your system.
+4. If it doesn't work install the driver for Kinect Camera manually from your device manager (you find the drivers inside the platform folder of SensorKinect). Then restart your system.
 
 MAC
 (tested on OSX 10.6.8)
 1. Install unstable OpenNI Binaries (v1.5.2.23) from http://www.openni.org/Downloads/OpenNIModules.aspx 
-2. Install SensorKinect (v5.1.0.25) from https://github.com/avin2/SensorKinect (you find the install file inside folder)
+2. Install SensorKinect (v5.1.0.25) from https://github.com/avin2/SensorKinect (you find the install .tar inside the bin folder).
 3. Install unstable NITE / OpenNI Middleware Binaries (v1.5.2.21) from http://www.openni.org/Downloads/OpenNIModules.aspx
-4. If it doesn't work install MacPorts, install lates LibUSB and restart your system.
+4. If it doesn't work install MacPorts, install latest LibUSB and restart your system.
 
 
 
