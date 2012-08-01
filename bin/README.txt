@@ -21,17 +21,14 @@ INSTALLATION AND DRIVERS
 
 WINDOWS
 (tested on Windows7 64bit, but installed 32bit-Versions of OpenNI, SensorKinect and NITE)
-1. Install unstable OpenNI Binaries (v1.5.2.23) from http://www.openni.org/Downloads/OpenNIModules.aspx
-2. Install SensorKinect (v5.1.0.25) from https://github.com/avin2/SensorKinect (you find the install .exe inside the bin folder).
+1. Install unstable OpenNI Binaries (v1.5.4.0) from http://www.openni.org/Downloads/OpenNIModules.aspx
+2. Install SensorKinect (v5.1.2.1) from https://github.com/avin2/SensorKinect (you find the install .exe inside the bin folder).
 3. Install unstable NITE / OpenNI Middleware Binaries (v1.5.2.21) from http://www.openni.org/Downloads/OpenNIModules.aspx
 4. If it doesn't work install the driver for Kinect Camera manually from your device manager (you find the drivers inside the platform folder of SensorKinect). Then restart your system.
 
 MAC
-(tested on OSX 10.6.8)
-1. Install unstable OpenNI Binaries (v1.5.2.23) from http://www.openni.org/Downloads/OpenNIModules.aspx 
-2. Install SensorKinect (v5.1.0.25) from https://github.com/avin2/SensorKinect (you find the install .tar inside the bin folder).
-3. Install unstable NITE / OpenNI Middleware Binaries (v1.5.2.21) from http://www.openni.org/Downloads/OpenNIModules.aspx
-4. If it doesn't work install MacPorts, install latest LibUSB and restart your system.
+(tested on OSX 10.7.4)
+For systems based on 10.7.4, KinectA should run without the installation of additional drivers.
 
 
 
@@ -70,4 +67,4 @@ OSC ADDRESS SETTINGS
 
 FURTHER INFORMATION
 
-http://www.mihoo.de/
+http://kinecta.mihoo.de
